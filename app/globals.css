@@ -89,6 +89,46 @@ body {
 .hero-fade {
   animation: hero-fade 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+/* Portrait entrance: rise + settle, then hand off to the idle float. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.hero-rise {
+  animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+/* Die-cut portrait idle float (runs on the inner wrapper, under the entrance). */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.float-slow {
+  animation: float-slow 6.5s ease-in-out 1.4s infinite;
+}
+/* "open to work" status pulse */
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(255, 138, 61, 0.45);
+  }
+  70% {
+    opacity: 1;
+    box-shadow: 0 0 0 6px rgba(255, 138, 61, 0);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2.2s ease-out infinite;
+}
 
 /* Lenis */
 html.lenis,
@@ -154,6 +194,11 @@ html.lenis body {
     animation: none !important;
   }
   .scroll-cue-dot {
+    animation: none !important;
+  }
+  .hero-rise,
+  .float-slow,
+  .pulse-dot {
     animation: none !important;
   }
   .hero-fade {
