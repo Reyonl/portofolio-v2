@@ -40,9 +40,8 @@ export const contactLinks: ContactLink[] = [
   { label: "GitHub", href: "https://github.com/Reyonl", status: "ok" },
   {
     label: "LinkedIn",
-    href: "#",
-    status: "todo",
-    note: "TODO: profile URL not verified yet — add when available",
+    href: "https://www.linkedin.com/in/reyon-lau-jiemin-195026345/",
+    status: "ok",
   },
   {
     label: "CV",
