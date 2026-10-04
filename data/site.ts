@@ -46,9 +46,8 @@ export const contactLinks: ContactLink[] = [
   },
   {
     label: "CV",
-    href: "#",
-    status: "todo",
-    note: "TODO: CV PDF not provided yet — drop it in /cv and link it",
+    href: "/cv/Reyon-Lau-Jiemin-CV.pdf",
+    status: "ok",
   },
 ];
 
