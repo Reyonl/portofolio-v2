@@ -1,26 +1,179 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Design tokens — "quiet dark, one signal" ───────────────────── */
+@theme {
+  --color-ink: #07090d;
+  --color-panel: #0f1218;
+  --color-panel2: #141a24;
+  --color-line: #1d2430;
+  --color-fg: #e9edf3;
+  --color-muted: #8b94a4;
+  --color-accent: #ff8a3d;
+
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Line-mask reveal shells. The inner child is a motion component whose
+   transform style resets inline styles — so the clip must come from CSS here,
+   not from a Tailwind class on the same element. */
+.mask-line {
+  display: block;
+  overflow: hidden;
+}
+.mask-line > * {
+  display: block;
+}
+/* Load-mode reveal: pure CSS keyframe so above-the-fold type animates
+   without waiting for the JS bundle (hydration-free first paint). */
+@keyframes mask-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.mask-line-load {
+  animation: mask-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes scroll-cue {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(16px);
+    opacity: 0.2;
+  }
+}
+.scroll-cue-dot {
+  animation: scroll-cue 1.8s ease-in-out infinite;
+}
+/* Hero secondary elements: static in HTML, CSS fade-in (no JS wait) */
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-fade {
+  animation: hero-fade 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Custom cursor: hide the native pointer only on fine-pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  .has-cursor,
+  .has-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* Skill marquees */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.marquee-left {
+  animation: marquee-left var(--marquee-duration, 34s) linear infinite;
+}
+.marquee-right {
+  animation: marquee-right var(--marquee-duration, 34s) linear infinite;
+}
+.marquee-track:hover .marquee-left,
+.marquee-track:hover .marquee-right {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-left,
+  .marquee-right {
+    animation: none;
+  }
+  /* Reduced-motion guard: static content even if SSR inline animation styles
+     are already in the HTML and before any client JS runs. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .mask-line > span {
+    transform: none !important;
+    animation: none !important;
+  }
+  .scroll-cue-dot {
+    animation: none !important;
+  }
+  .hero-fade {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Film grain, purely decorative. A small baked noise tile (2.7 KB) instead of
+   an SVG feTurbulence filter — filters rasterize full-viewport on load and
+   that cost was visible on the mobile performance trace. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("/images/grain.png");
+  background-repeat: repeat;
+  background-size: 48px 48px;
 }
