@@ -36,6 +36,12 @@ export const timeline: Milestone[] = [
     tag: "workflow",
   },
   {
+    date: "04/2026",
+    title: "Certified Web Programmer",
+    line: "Earned national certification (BNSP) for Web Programming.",
+    tag: "cert",
+  },
+  {
     date: "07/2026",
     title: "Graduated",
     line: "Informatics Engineering, Universitas Pamulang.",
