@@ -6,6 +6,7 @@ import MaskReveal from "@/components/MaskReveal";
 import { RevealGroup, RevealItem } from "@/components/Reveal";
 import { timeline } from "@/data/timeline";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import GitHubActivity from "@/components/GitHubActivity";
 
 /**
  * Journey: a sticky rail whose progress line scales with scroll, milestones
@@ -71,6 +72,11 @@ export default function Journey() {
               </RevealItem>
             ))}
           </RevealGroup>
+        </div>
+
+        {/* Live GitHub Stats & Commit Activity */}
+        <div className="mt-16 sm:mt-20">
+          <GitHubActivity />
         </div>
       </div>
     </section>

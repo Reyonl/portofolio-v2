@@ -9,6 +9,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import LiveTimeBadge from "@/components/LiveTimeBadge";
 import MaskReveal from "@/components/MaskReveal";
 import Magnetic from "@/components/Magnetic";
 import { profile } from "@/data/site";
@@ -65,7 +66,11 @@ export default function Hero() {
 
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-6">
         <div className="min-w-0">
-          <div className="hero-fade mb-6 flex flex-col font-mono text-[10px] tracking-[0.2em] text-muted uppercase sm:text-[11px] sm:tracking-[0.28em]" style={{ animationDelay: "0.1s" }}>
+          <div className="hero-fade mb-5" style={{ animationDelay: "0.05s" }}>
+            <LiveTimeBadge />
+          </div>
+
+          <div className="hero-fade mb-6 flex flex-col font-mono text-[10px] tracking-[0.2em] text-muted uppercase sm:text-[11px] sm:tracking-[0.28em]" style={{ animationDelay: "0.15s" }}>
             <span className="whitespace-nowrap">{profile.role}</span>
             <span className="whitespace-nowrap">
               {profile.school} · {profile.graduation}
@@ -92,7 +97,7 @@ export default function Hero() {
             <Magnetic>
               <Link
                 href="#work"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
               >
                 Selected work
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -104,7 +109,7 @@ export default function Hero() {
               href={profile.links.github}
               target="_blank"
               rel="noreferrer noopener"
-              className="font-mono text-xs tracking-[0.18em] text-muted uppercase underline-offset-4 transition-colors hover:text-fg hover:underline"
+              className="inline-flex min-h-[44px] items-center px-3 py-2 font-mono text-xs tracking-[0.18em] text-muted uppercase underline-offset-4 transition-colors hover:text-fg hover:underline"
             >
               @{profile.links.githubHandle}
             </a>
@@ -143,7 +148,7 @@ export default function Hero() {
                 width={560}
                 height={880}
                 priority
-                sizes="(max-width: 1024px) 62vw, 430px"
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 430px"
                 className="relative h-auto w-full [filter:sepia(0.07)_saturate(1.06)_drop-shadow(0_28px_64px_rgba(255,138,61,0.14))]"
               />
             </div>

@@ -49,6 +49,17 @@ export default function Nav() {
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
+
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
+            className="flex items-center gap-1.5 rounded-full border border-line bg-panel/70 px-3 py-1 font-mono text-[10px] text-muted tracking-wider hover:border-accent hover:text-fg transition-colors"
+            title="Open Command Palette (Cmd + K)"
+          >
+            <span>Search</span>
+            <kbd className="rounded bg-panel2 px-1 py-0.2 border border-line text-[9px] text-accent">⌘K</kbd>
+          </button>
+
           <a
             href="mailto:liurey55@gmail.com"
             className="rounded-full border border-line px-4 py-1.5 font-mono text-[11px] tracking-[0.12em] text-fg uppercase transition-colors hover:border-accent hover:text-accent"
@@ -62,16 +73,18 @@ export default function Nav() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle menu"
-          className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="flex h-11 w-11 items-center justify-center p-2.5 md:hidden"
         >
-          <motion.span
-            animate={open ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
-            className="block h-px w-5 bg-fg"
-          />
-          <motion.span
-            animate={open ? { rotate: -45, y: -2.5 } : { rotate: 0, y: 0 }}
-            className="block h-px w-5 bg-fg"
-          />
+          <div className="flex flex-col items-center justify-center gap-1.5">
+            <motion.span
+              animate={open ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
+              className="block h-px w-5 bg-fg"
+            />
+            <motion.span
+              animate={open ? { rotate: -45, y: -2.5 } : { rotate: 0, y: 0 }}
+              className="block h-px w-5 bg-fg"
+            />
+          </div>
         </button>
       </div>
 
@@ -86,12 +99,25 @@ export default function Nav() {
             className="overflow-hidden border-b border-line bg-ink/95 backdrop-blur-md md:hidden"
           >
             <ul className="flex flex-col gap-1 px-5 py-4">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    window.dispatchEvent(new CustomEvent("open-command-palette"));
+                  }}
+                  className="flex w-full items-center justify-between rounded-lg bg-panel2/80 px-3 py-3 font-mono text-sm tracking-wider text-accent uppercase"
+                >
+                  <span>Quick Search & Jump</span>
+                  <span className="rounded bg-ink px-2 py-0.5 text-xs text-muted">⌘K</span>
+                </button>
+              </li>
               {nav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="block py-2 font-mono text-sm tracking-widest text-muted uppercase hover:text-accent"
+                    className="block min-h-[44px] py-2.5 font-mono text-sm tracking-widest text-muted uppercase hover:text-accent flex items-center"
                   >
                     {item.label}
                   </Link>

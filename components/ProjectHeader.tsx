@@ -62,7 +62,7 @@ export default function ProjectHeader({ project }: { project: Project }) {
               href={project.repo.url}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
             >
               {project.repo.label}
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -75,7 +75,7 @@ export default function ProjectHeader({ project }: { project: Project }) {
               href={project.release}
               target="_blank"
               rel="noreferrer noopener"
-              className="font-mono text-xs tracking-[0.18em] text-muted uppercase underline-offset-4 hover:text-fg hover:underline"
+              className="inline-flex min-h-[44px] items-center px-3 font-mono text-xs tracking-[0.18em] text-muted uppercase underline-offset-4 hover:text-fg hover:underline"
             >
               Release v1.0.1
             </a>

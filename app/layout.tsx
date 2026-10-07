@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import CommandPalette from "@/components/CommandPalette";
 import "./globals.css";
 
 // Canonical URL: set NEXT_PUBLIC_SITE_URL at deploy time. The placeholder
@@ -64,12 +65,79 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${BASE}/#person`,
+        name: "Reyon Lau Jiemin",
+        givenName: "Reyon",
+        familyName: "Lau Jiemin",
+        url: BASE,
+        jobTitle: "Junior Software Developer",
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: "Universitas Pamulang",
+          sameAs: "https://unpam.ac.id",
+        },
+        hasCredential: [
+          {
+            "@type": "EducationalOccupationalCredential",
+            name: "BNSP Certified Web Programmer",
+            credentialCategory: "Professional Certification",
+            recognizedBy: {
+              "@type": "Organization",
+              name: "Badan Nasional Sertifikasi Profesi (BNSP)",
+            },
+          },
+        ],
+        sameAs: [
+          "https://github.com/Reyonl",
+          "https://www.linkedin.com/in/reyon-lau-jiemin-195026345/",
+        ],
+        knowsAbout: [
+          "Laravel",
+          "PHP",
+          "Next.js",
+          "React",
+          "TypeScript",
+          "MySQL",
+          "Flutter",
+          "Livewire",
+          "Tailwind CSS",
+          "REST API",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${BASE}/#website`,
+        url: BASE,
+        name: "Reyon Lau Jiemin — Portfolio",
+        description:
+          "Fresh Informatics Engineering graduate (Universitas Pamulang, 2026). Laravel at home, Next.js on the way up. Real shipped projects.",
+        author: {
+          "@id": `${BASE}/#person`,
+        },
+      },
+    ],
+  };
+
   return (
     <html
       lang="en"
       className={`${bricolage.variable} ${inter.variable} ${jetbrains.variable} grain`}
     >
-      <body className="min-h-dvh bg-ink text-fg antialiased">{children}</body>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className="min-h-dvh bg-ink text-fg antialiased">
+        <CommandPalette />
+        {children}
+      </body>
     </html>
   );
 }
