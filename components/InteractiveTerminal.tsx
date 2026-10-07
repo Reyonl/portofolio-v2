@@ -51,15 +51,18 @@ export default function InteractiveTerminal() {
   const [historyIdx, setHistoryIdx] = useState<number>(-1);
   const [isExecuting, setIsExecuting] = useState(false);
 
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalBodyRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const scrollToBottom = () => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const isFirstMount = useRef(true);
 
   useEffect(() => {
-    scrollToBottom();
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
   }, [history]);
 
   const executeCommand = useCallback((rawCmd: string) => {
@@ -280,6 +283,7 @@ export default function InteractiveTerminal() {
 
       {/* Terminal Body */}
       <div
+        ref={terminalBodyRef}
         className="max-h-[380px] min-h-[260px] overflow-y-auto p-4 sm:p-5 text-xs leading-relaxed space-y-3.5"
         onClick={() => inputRef.current?.focus()}
       >
@@ -341,8 +345,6 @@ export default function InteractiveTerminal() {
             Executing command via pipeline...
           </div>
         )}
-
-        <div ref={terminalEndRef} />
       </div>
 
       {/* Terminal Input Bar */}
