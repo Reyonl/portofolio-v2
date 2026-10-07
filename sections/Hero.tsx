@@ -75,6 +75,12 @@ export default function Hero() {
             <span className="whitespace-nowrap">
               {profile.school} · {profile.graduation}
             </span>
+            <div className="mt-2 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-2.5 py-0.5 text-[9px] sm:text-[10px] text-accent font-semibold tracking-wider">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                {profile.certification}
+              </span>
+            </div>
           </div>
 
           <h1 className="font-display text-[clamp(2.75rem,9.5vw,8.5rem)] leading-[0.86] font-bold tracking-[-0.03em] lg:text-[clamp(2.75rem,6vw,7rem)]">
@@ -91,7 +97,7 @@ export default function Hero() {
           </p>
 
           <div
-            className="hero-fade mt-10 flex flex-wrap items-center gap-4"
+            className="hero-fade mt-10 flex flex-wrap items-center gap-3.5"
             style={{ animationDelay: "0.45s" }}
           >
             <Magnetic>
@@ -105,6 +111,13 @@ export default function Hero() {
                 </svg>
               </Link>
             </Magnetic>
+            <Link
+              href="#terminal"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-panel px-4 py-2.5 font-mono text-xs tracking-wider text-fg uppercase transition-colors hover:border-accent hover:text-accent"
+            >
+              <span className="text-accent font-bold">$</span>
+              <span>CLI Playground</span>
+            </Link>
             <a
               href={profile.links.github}
               target="_blank"

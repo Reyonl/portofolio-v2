@@ -1,16 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { nav } from "@/data/site";
 import { DUR, EASE } from "@/lib/motion";
+import { isSoundEnabled, toggleSound } from "@/lib/sound";
+
+const sfxSub = (cb: () => void) => {
+  const handler = () => cb();
+  window.addEventListener("storage", handler);
+  window.addEventListener("sfx-toggle", handler);
+  return () => {
+    window.removeEventListener("storage", handler);
+    window.removeEventListener("sfx-toggle", handler);
+  };
+};
 
 /** Slim top bar: brand, anchors, email CTA. Shrinks once you start scrolling. */
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
+  const soundOn = useSyncExternalStore(sfxSub, isSoundEnabled, () => false);
 
   useEffect(
     () => scrollY.on("change", (v) => setScrolled(v > 40)),
@@ -58,6 +70,22 @@ export default function Nav() {
           >
             <span>Search</span>
             <kbd className="rounded bg-panel2 px-1 py-0.2 border border-line text-[9px] text-accent">⌘K</kbd>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              toggleSound();
+              window.dispatchEvent(new CustomEvent("sfx-toggle"));
+            }}
+            className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[10px] tracking-wider transition-colors ${
+              soundOn
+                ? "border-accent/80 bg-accent/15 text-accent shadow-[0_0_10px_rgba(255,138,61,0.2)]"
+                : "border-line bg-panel/70 text-muted hover:border-accent hover:text-fg"
+            }`}
+            title="Toggle tactile sound effects"
+          >
+            <span>{soundOn ? "SFX: ON" : "SFX: OFF"}</span>
           </button>
 
           <a
@@ -110,6 +138,19 @@ export default function Nav() {
                 >
                   <span>Quick Search & Jump</span>
                   <span className="rounded bg-ink px-2 py-0.5 text-xs text-muted">⌘K</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggleSound();
+                    window.dispatchEvent(new CustomEvent("sfx-toggle"));
+                  }}
+                  className="flex w-full items-center justify-between rounded-lg bg-panel px-3 py-2.5 font-mono text-xs tracking-wider text-fg uppercase border border-line"
+                >
+                  <span>Sound Effects</span>
+                  <span className="text-accent font-bold">{soundOn ? "ON" : "OFF"}</span>
                 </button>
               </li>
               {nav.map((item) => (

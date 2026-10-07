@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { projects } from "@/data/projects";
 import { profile } from "@/data/site";
+import { playClick, playSuccess } from "@/lib/sound";
 
 interface CommandItem {
   id: string;
@@ -88,6 +89,19 @@ export default function CommandPalette() {
             router.push("/#work");
           } else {
             window.location.hash = "#work";
+          }
+        },
+      },
+      {
+        id: "nav-terminal",
+        category: "Navigation",
+        title: "Go to Hermes CLI Playground",
+        subtitle: "#terminal section • Interactive developer terminal",
+        action: () => {
+          if (window.location.pathname !== "/") {
+            router.push("/#terminal");
+          } else {
+            window.location.hash = "#terminal";
           }
         },
       },
@@ -220,11 +234,13 @@ export default function CommandPalette() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
+      playClick(580, 0.025);
       setSelectedIndex((prev) =>
         prev < filteredCommands.length - 1 ? prev + 1 : 0
       );
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
+      playClick(620, 0.025);
       setSelectedIndex((prev) =>
         prev > 0 ? prev - 1 : filteredCommands.length - 1
       );
@@ -232,6 +248,7 @@ export default function CommandPalette() {
       e.preventDefault();
       const current = filteredCommands[selectedIndex];
       if (current) {
+        playSuccess();
         current.action();
         setOpen(false);
       }
