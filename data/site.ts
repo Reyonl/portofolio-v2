@@ -19,7 +19,7 @@ export const profile = {
   role: "Fresh graduate · Informatics Engineering",
   school: "Universitas Pamulang",
   graduation: "07/2026",
-  certification: "BNSP Certified Web Programmer (Apr 2026)",
+  certification: "BNSP Certified IT Programmer (No. 62000 2519 0 0024767, Oct 2026)",
   tagline: "I ship real projects fast — Laravel at home, Next.js on the way up.",
   codedSince: 2022,
   links: {
