@@ -20,6 +20,13 @@ export interface Project {
   release?: string;
   todo?: string; // clearly marked missing content
   featured?: boolean;
+  provenance?: {
+    generatedBy: string;
+    version: string;
+    head: string;
+    branch: string;
+    verifiedAt: string;
+  };
 }
 
 export const projects: Project[] = [
@@ -29,20 +36,30 @@ export const projects: Project[] = [
     title: "Hermes DevOps",
     blurb: "TypeScript CLI that runs real build/test/release steps — and refuses success without evidence.",
     detail:
-      "Registers local projects, detects their stack, executes their own commands behind SAFE / REVIEW / DANGEROUS gates, re-reads the world before reporting, and keeps an append-only audit trail. 198 tests, released v0.7.5.",
+      "Registers local projects, detects their stack, executes their own commands behind SAFE / REVIEW / DANGEROUS gates, re-reads the world before reporting, and keeps an append-only audit trail. 206 tests, released v0.8.0 with Phase 8 bootstrap scaffolding.",
     category: "Developer Automation",
     period: "2026 — present",
     status: "active",
     stack: ["TypeScript", "Node.js", "Git", "GitHub Actions"],
     image: {
       src: "/images/hermes-terminal-wide.jpg",
-      alt: "Terminal showing real hermes-devops status output at v0.7.5 with registered projects and health counts.",
+      alt: "Terminal showing real hermes-devops status output at v0.8.0 with registered projects and health counts.",
       width: 1412,
       height: 564,
     },
-    repo: undefined,
-    todo: "TODO: repository is currently private — link goes live once publication is approved.",
+    repo: {
+      url: "https://github.com/Reyonl/hermes-devops",
+      label: "Repository",
+    },
+    release: "https://github.com/Reyonl/hermes-devops/releases/tag/v0.8.0",
     featured: true,
+    provenance: {
+      generatedBy: "hermes-devops/0.8.0",
+      version: "0.8.0",
+      head: "728c7e3",
+      branch: "main",
+      verifiedAt: "2026-10-13",
+    },
   },
   {
     slug: "warung-lupi-web",

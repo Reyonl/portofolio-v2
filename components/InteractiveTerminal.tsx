@@ -14,6 +14,7 @@ interface TerminalLine {
 const PRESET_COMMANDS = [
   { label: "hermes doctor", cmd: "hermes doctor", desc: "Check toolchains & environment health" },
   { label: "hermes status", cmd: "hermes status", desc: "Overview of registered projects" },
+  { label: "hermes init", cmd: "hermes init demo-app --dry-run", desc: "Preview Phase 8 project scaffolding" },
   { label: "hermes test daily-co", cmd: "hermes test daily-co", desc: "Run 46 tests against MySQL" },
   { label: "bnsp verify", cmd: "bnsp verify", desc: "Inspect BNSP Web Programmer credentials" },
   { label: "cat cv.summary", cmd: "cat cv.summary", desc: "View developer background profile" },
@@ -24,7 +25,7 @@ export default function InteractiveTerminal() {
     {
       id: "init-1",
       type: "system",
-      content: "Hermes DevOps v0.7.5 (x86_64-pc-windows / node v25.2)",
+      content: "Hermes DevOps v0.8.0 (x86_64-pc-windows / node v25.2)",
     },
     {
       id: "init-2",
@@ -131,13 +132,25 @@ export default function InteractiveTerminal() {
       } else if (lower === "hermes status") {
         output =
           "Projects Registered in Hermes DevOps:\n" +
-          "  [01] hermes-devops    — TS CLI / Developer Automation (198 tests, v0.7.5)\n" +
+          "  [01] hermes-devops    — TS CLI / Developer Automation (206 tests, v0.8.0)\n" +
           "  [02] warung-lupi-web  — Laravel 11 / React Shared API (Live domain)\n" +
           "  [03] daily-co         — Laravel Livewire + Fabric.js (46 CI tests)\n" +
-          "  [04] gadai-enoni-cell — Laravel 10 + Midtrans Snap Core (In-production)\n" +
+          "  [04] portofolio-v2    — Next.js 16 / React 19 (Provable Portfolio)\n" +
           "Audit Trail: append-only log under ~/.config/hermes-devops/data/audit/";
-        badge = "4 REGISTERED";
+        badge = "REGISTERED";
         badgeColor = "green";
+      } else if (lower.includes("init")) {
+        output =
+          "DRY RUN — init demo-app\n" +
+          "--------------------------------\n" +
+          "  target:   ./demo-app\n" +
+          "  preset:   node (Node.js)\n" +
+          "  files:    package.json, index.js, test/index.test.js, .gitignore, .env.example, README.md\n" +
+          "  git:      init -b main · add -A · commit -m \"chore: initial commit from hermes init\"\n" +
+          "  register: auto-register to hermes registry\n" +
+          "Phase 8 bootstrap verified. Nothing executed.";
+        badge = "REVIEW GATED";
+        badgeColor = "cyan";
       } else if (lower.includes("test") && (lower.includes("daily") || lower.includes("daily-co"))) {
         output =
           "Running PHPUnit/Pest suite for DAILY.CO against MySQL test database:\n" +
@@ -155,8 +168,9 @@ export default function InteractiveTerminal() {
           "  ✓ test/gate-safety-model.test.ts (65 specs)\n" +
           "  ✓ test/detection-adapters.test.ts (51 specs)\n" +
           "  ✓ test/evidence-verifier.test.ts (40 specs)\n" +
-          "Suites: 4 passed, 4 total | Tests: 198 passed | Exit: 0";
-        badge = "198/198 PASS";
+          "  ✓ test/init-ops.test.ts (8 specs)\n" +
+          "Suites: 5 passed, 5 total | Tests: 206 passed | Exit: 0";
+        badge = "206/206 PASS";
         badgeColor = "green";
       } else if (lower.includes("bnsp")) {
         output =

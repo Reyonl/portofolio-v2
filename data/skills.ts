@@ -96,7 +96,7 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "leveling",
     status: "Strict Static Typing",
     evidence:
-      "Core language of Hermes DevOps CLI: safety gates (SAFE / REVIEW / DANGEROUS), AST inspection, and 198 automated unit/integration tests.",
+      "Core language of Hermes DevOps CLI: safety gates (SAFE / REVIEW / DANGEROUS), AST inspection, and 206 automated unit/integration tests.",
     highlightTags: ["Strict Mode", "Discriminated Unions", "CLI Architecture", "Generics"],
     projectSlug: "hermes-devops",
   },

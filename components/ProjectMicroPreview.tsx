@@ -185,7 +185,7 @@ export default function ProjectMicroPreview({
     const steps = [
       "hermes inspect --target ./portfolio-v2",
       "GATING: SAFE ✓ | REVIEW: 0 | DANGEROUS: 0",
-      "198/198 tests passed in 1.42s [RELEASE READY]",
+      "206/206 tests passed in 1.42s [RELEASE READY]",
     ];
     return (
       <div className="relative flex h-full w-full flex-col justify-between overflow-hidden bg-ink/95 p-4 text-xs font-mono">
@@ -196,7 +196,7 @@ export default function ProjectMicroPreview({
               HERMES CLI ENGINE
             </span>
           </div>
-          <span className="text-[10px] text-muted">v0.7.5</span>
+          <span className="text-[10px] text-muted">v0.8.0</span>
         </div>
 
         <div className="my-2 flex-1 rounded-lg border border-line bg-panel p-2.5 font-mono text-[10px] text-fg/80 space-y-1.5">
