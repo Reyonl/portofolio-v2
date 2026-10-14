@@ -51,234 +51,145 @@ export default function Hero() {
       onMouseMove={onMove}
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 pt-28 pb-24 sm:px-8"
     >
-      {/* Background digital ambient grid and subtle glowing radars */}
+      {/* ambient depth plates — radial-gradient instead of blur() so the
+          glow is cheap to rasterize (no full-layer blur on first paint) */}
       <motion.div
         aria-hidden
         style={{ x: glowX, y: glowY }}
-        className="pointer-events-none absolute -top-[12%] right-[-10%] h-[64vmin] w-[64vmin] rounded-full bg-[radial-gradient(closest-side,rgba(16,185,129,0.12),transparent)]"
+        className="pointer-events-none absolute -top-[10%] right-[-10%] h-[60vmin] w-[60vmin] rounded-full bg-[radial-gradient(closest-side,rgba(255,138,61,0.16),transparent)]"
       />
       <motion.div
         aria-hidden
         style={{ x: dotX, y: dotY }}
-        className="pointer-events-none absolute bottom-[5%] left-[-8%] h-[50vmin] w-[50vmin] rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.10),transparent)]"
+        className="pointer-events-none absolute bottom-[8%] left-[-8%] h-[42vmin] w-[42vmin] rounded-full border border-line/70"
       />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
-        {/* Left Column: Cyber-Military HUD Hero Content */}
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-6">
         <div className="min-w-0">
-          {/* Live System Time & Server Status */}
-          <div className="hero-fade mb-5 flex flex-wrap items-center gap-3" style={{ animationDelay: "0.05s" }}>
+          <div className="hero-fade mb-5" style={{ animationDelay: "0.05s" }}>
             <LiveTimeBadge />
-            <span className="font-mono text-[10px] tracking-wider text-[#10B981] bg-[#10B981]/10 border border-[#10B981]/30 px-2 py-0.5 rounded">
-              [SYS: ENGAGED]
-            </span>
           </div>
 
-          {/* Military Game Style UI Badge Labels */}
-          <div
-            className="hero-fade mb-6 flex flex-wrap items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-wider uppercase"
-            style={{ animationDelay: "0.12s" }}
-          >
-            <span className="inline-flex items-center gap-1.5 rounded border border-[#10B981]/50 bg-[#10B981]/10 px-2.5 py-1 text-[#10B981] font-semibold">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-ping" />
-              [RANK: BNSP CERTIFIED WEB PROGRAMMER]
+          <div className="hero-fade mb-6 flex flex-col font-mono text-[10px] tracking-[0.2em] text-muted uppercase sm:text-[11px] sm:tracking-[0.28em]" style={{ animationDelay: "0.15s" }}>
+            <span className="whitespace-nowrap">{profile.role}</span>
+            <span className="whitespace-nowrap">
+              {profile.school} · {profile.graduation}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded border border-[#F59E0B]/50 bg-[#F59E0B]/10 px-2.5 py-1 text-[#F59E0B] font-semibold">
-              [ALUMNI: UNIVERSITAS PAMULANG]
-            </span>
-          </div>
-
-          {/* Huge bold cyber-military typography with accent lines */}
-          <div className="relative">
-            {/* Top decorative accent lines */}
-            <div className="mb-2 flex items-center gap-2" aria-hidden>
-              <div className="h-1 w-12 bg-[#F59E0B]" />
-              <div className="h-1 w-6 bg-[#10B981]" />
-              <div className="h-[1px] flex-1 bg-line/80" />
-              <span className="font-mono text-[9px] text-muted tracking-widest uppercase">ID: REYON-01</span>
-            </div>
-
-            <h1 className="font-display text-[clamp(2.5rem,8vw,7.2rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.03em] text-[#E6EDF3]">
-              <span className="block text-white">
-                REYON
+            <div className="mt-2 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-2.5 py-0.5 text-[9px] sm:text-[10px] text-accent font-semibold tracking-wider">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                {profile.certification}
               </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] via-[#fbbf24] to-[#10B981]">
-                LAU JIEMIN
-              </span>
-            </h1>
-
-            {/* Bottom accent cyber line */}
-            <div className="mt-3 flex items-center gap-2" aria-hidden>
-              <div className="h-[2px] w-20 bg-[#10B981]" />
-              <div className="h-[2px] w-8 bg-[#F59E0B]" />
-              <div className="h-px flex-1 bg-line/60" />
             </div>
           </div>
 
-          {/* Subheading */}
-          <p className="mt-6 max-w-xl font-sans text-base leading-relaxed text-[#A0AEC0] sm:text-lg">
-            <span className="font-bold text-[#E6EDF3]">I SHIP REAL PROJECTS FAST</span> — Laravel at home, Next.js on the way up. Built with verified audit trails, automated gates, and zero fabricated claims.
+          <h1 className="font-display text-[clamp(2.75rem,9.5vw,8.5rem)] leading-[0.86] font-bold tracking-[-0.03em] lg:text-[clamp(2.75rem,6vw,7rem)]">
+            <MaskReveal as="span" mode="load" order={0} className="whitespace-nowrap">
+              {profile.firstName}
+            </MaskReveal>
+            <MaskReveal as="span" mode="load" order={1} className="text-accent">
+              {profile.lastName}
+            </MaskReveal>
+          </h1>
+
+          <p className="mt-8 max-w-md text-lg leading-relaxed text-muted sm:text-xl">
+            {profile.tagline}
           </p>
 
-          {/* Leveling up XP bar & telemetry metrics */}
-          <div className="hero-fade mt-6 rounded-lg border border-line bg-panel2/70 p-3.5 font-mono text-xs" style={{ animationDelay: "0.3s" }}>
-            <div className="flex items-center justify-between text-[11px] mb-1.5">
-              <span className="text-[#F59E0B] font-semibold tracking-wider">
-                [LVL 22] INFORMATICS ENGINEER
-              </span>
-              <span className="text-muted tracking-wider">
-                XP: 8,450 / 10,000 EXP
-              </span>
-            </div>
-            {/* XP progress bar */}
-            <div className="h-2 w-full overflow-hidden rounded bg-[#090A0F] border border-line">
-              <div
-                className="h-full rounded bg-gradient-to-r from-[#F59E0B] to-[#10B981] transition-all duration-1000"
-                style={{ width: "84.5%" }}
-              />
-            </div>
-            <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-[10px] text-muted">
-              <span>CLASS: <strong className="text-fg">FULLSTACK DEV</strong></span>
-              <span>UPTIME: <strong className="text-[#10B981]">99.98%</strong></span>
-              <span>SPECIALTY: <strong className="text-fg">LARAVEL &bull; NEXT.JS</strong></span>
-              <span>STATE: <strong className="text-[#10B981]">COMBAT_READY</strong></span>
-            </div>
-          </div>
-
-          {/* Tactical CTAs */}
           <div
-            className="hero-fade mt-8 flex flex-wrap items-center gap-4"
+            className="hero-fade mt-10 flex flex-wrap items-center gap-3.5"
             style={{ animationDelay: "0.45s" }}
           >
             <Magnetic>
               <Link
                 href="#work"
-                className="group relative inline-flex min-h-[46px] items-center gap-2.5 rounded border border-[#10B981] bg-[#10B981] px-6 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#090A0F] transition-all hover:bg-[#10B981]/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
               >
-                <span>🎮 SELECTED MISSIONS</span>
-                <span className="text-black/80 font-mono text-[10px]">[01-04]</span>
+                Selected work
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" />
+                </svg>
               </Link>
             </Magnetic>
-
             <Link
               href="#terminal"
-              className="inline-flex min-h-[46px] items-center gap-2 rounded border border-line bg-panel2/80 px-5 py-2.5 font-mono text-xs font-semibold tracking-wider text-fg uppercase transition-all hover:border-[#F59E0B] hover:text-[#F59E0B] hover:bg-panel2"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-panel px-4 py-2.5 font-mono text-xs tracking-wider text-fg uppercase transition-colors hover:border-accent hover:text-accent"
             >
-              <span>⚙️ CLI PLAYGROUND</span>
-              <span className="rounded bg-black/40 px-1 py-0.5 text-[9px] text-[#F59E0B]">~</span>
+              <span className="text-accent font-bold">$</span>
+              <span>CLI Playground</span>
             </Link>
-
             <a
               href={profile.links.github}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex min-h-[44px] items-center gap-1.5 px-3 py-2 font-mono text-xs tracking-wider text-muted uppercase transition-colors hover:text-[#10B981]"
+              className="inline-flex min-h-[44px] items-center px-3 py-2 font-mono text-xs tracking-[0.18em] text-muted uppercase underline-offset-4 transition-colors hover:text-fg hover:underline"
             >
-              <span className="text-[#10B981]">➜</span>
-              <span>@{profile.links.githubHandle}</span>
+              @{profile.links.githubHandle}
             </a>
           </div>
         </div>
 
-        {/* Right Column: Tactical HUD Interface & Reyon's Portrait */}
+        {/* ── portrait: die-cut figure, no box — orbiting dashed rings ───── */}
         <motion.div
           style={{ x: faceX, y: faceY }}
-          className="relative mx-auto w-full max-w-[420px] lg:justify-self-end"
+          className="relative mx-auto w-[min(62vw,300px)] sm:w-[min(48vw,340px)] lg:w-full lg:max-w-[430px] lg:justify-self-end"
         >
-          {/* Tactical Frame with bracket corners and HUD telemetry */}
-          <div className="hud-corner-bracket relative rounded-xl border border-line bg-[#0B0C10]/95 p-4 shadow-2xl shadow-black/80">
-            {/* Top Tactical Status Header */}
-            <div className="flex items-center justify-between border-b border-line/60 pb-2.5 font-mono text-[10px] tracking-wider uppercase">
-              <div className="flex items-center gap-2 text-[#10B981] font-semibold">
-                <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" />
-                <span>[PLAYER_AVATAR // REYON_LAU]</span>
-              </div>
-              <span className="text-[#F59E0B] font-mono text-[9px] border border-[#F59E0B]/30 px-1.5 py-0.2 rounded bg-[#F59E0B]/10">
-                P-ID #0804
-              </span>
+          <div className="hero-rise relative">
+            {/* dashed orbit behind the head — one slow revolution */}
+            <motion.div
+              aria-hidden
+              animate={reduce ? {} : { rotate: 360 }}
+              transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
+              className="absolute left-1/2 top-[5%] aspect-square w-[72%] -translate-x-1/2 rounded-full border border-dashed border-accent/35"
+            />
+            {/* second, quieter arc ring — counter-rotating */}
+            <motion.div
+              aria-hidden
+              animate={reduce ? {} : { rotate: -360 }}
+              transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+              className="absolute left-1/2 top-[7%] aspect-square w-[58%] -translate-x-1/2 rounded-full border border-line/50 [border-top-color:rgba(255,138,61,0.45)] [border-top-width:2px]"
+            />
+            <div className="float-slow relative">
+              {/* halo behind the head: keeps dark hair separated from the ink bg */}
+              <div
+                aria-hidden
+                className="absolute left-1/2 top-[4%] h-[52%] w-[52%] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(255,138,61,0.13),transparent)]"
+              />
+              <Image
+                src="/images/reyon.png"
+                alt="Portrait of Reyon Lau Jiemin smiling with arms crossed, wearing a dark batik shirt"
+                width={560}
+                height={880}
+                priority
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 430px"
+                className="relative h-auto w-full [filter:sepia(0.07)_saturate(1.06)_drop-shadow(0_28px_64px_rgba(255,138,61,0.14))]"
+              />
             </div>
-
-            {/* Health and Status Metrics on top / border */}
-            <div className="mt-2 grid grid-cols-3 gap-2 font-mono text-[9px] text-muted border-b border-line/40 pb-2">
-              <div>
-                <span className="block text-[8px] text-muted/80">HP: 100%</span>
-                <div className="h-1.5 w-full rounded-sm bg-line overflow-hidden mt-0.5">
-                  <div className="h-full w-full bg-[#10B981]" />
-                </div>
-              </div>
-              <div>
-                <span className="block text-[8px] text-muted/80">SHIELD: 98%</span>
-                <div className="h-1.5 w-full rounded-sm bg-line overflow-hidden mt-0.5">
-                  <div className="h-full w-[98%] bg-[#06B6D4]" />
-                </div>
-              </div>
-              <div>
-                <span className="block text-[8px] text-muted/80">PING: 14ms</span>
-                <div className="h-1.5 w-full rounded-sm bg-line overflow-hidden mt-0.5">
-                  <div className="h-full w-full bg-[#F59E0B]" />
-                </div>
-              </div>
-            </div>
-
-            {/* Main Portrait Area with HUD scanner overlay */}
-            <div className="relative mt-3 overflow-hidden rounded-lg border border-line/80 bg-[#07080D]">
-              <div className="hud-scanner" />
-
-              {/* Faint targeting reticle lines */}
-              <div className="pointer-events-none absolute inset-0 z-10">
-                <div className="absolute left-3 top-3 h-3 w-3 border-l border-t border-[#10B981]/60" />
-                <div className="absolute right-3 top-3 h-3 w-3 border-r border-t border-[#10B981]/60" />
-                <div className="absolute bottom-3 left-3 h-3 w-3 border-l border-b border-[#10B981]/60" />
-                <div className="absolute right-3 bottom-3 h-3 w-3 border-r border-b border-[#10B981]/60" />
-              </div>
-
-              {/* Reyon Portrait */}
-              <div className="relative aspect-[4/5] w-full">
-                <Image
-                  src="/images/reyon.png"
-                  alt="Portrait photograph of a smiling young Indonesian man (Reyon Lau Jiemin) with arms crossed wearing a dark batik shirt"
-                  fill
-                  priority
-                  sizes="(max-width: 640px) 300px, 420px"
-                  className="object-contain object-bottom drop-shadow-[0_12px_28px_rgba(0,0,0,0.8)] filter brightness-[0.98] contrast-[1.05]"
-                />
-              </div>
-
-              {/* Badge Overlay */}
-              <div className="absolute bottom-3 inset-x-3 z-20 flex items-center justify-between rounded bg-[#090A0F]/90 px-3 py-1.5 border border-[#10B981]/40 backdrop-blur-md font-mono text-[10px]">
-                <div className="flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" />
-                  <span className="font-semibold text-[#10B981] tracking-wider">[STATUS: ACTIVE // OPEN TO WORK]</span>
-                </div>
-                <span className="text-[#F59E0B] font-bold text-[9px]">IDN</span>
-              </div>
-            </div>
-
-            {/* Camera spec info in small UI fonts */}
-            <div className="mt-3 flex items-center justify-between font-mono text-[10px] tracking-wider text-muted px-1">
-              <span>FOCAL: 50mm f/1.8</span>
-              <span className="text-fg/70 font-medium">CANON EOS R5 • 01/2026</span>
-              <span className="text-[#10B981]">RAW+JPEG</span>
+            {/* live-status chip sitting in the fade zone below the cutout */}
+            <div
+              className="hero-fade absolute -bottom-1 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-line bg-panel/90 px-3.5 py-1.5 font-mono text-[10px] tracking-[0.18em] text-fg/80 uppercase backdrop-blur-sm"
+              style={{ animationDelay: "0.9s" }}
+            >
+              <span className="pulse-dot block h-1.5 w-1.5 rounded-full bg-accent" />
+              open to work
             </div>
           </div>
+          {/* honest little photo credit */}
+          <p className="mt-3 text-center font-mono text-[10px] tracking-[0.22em] text-muted uppercase lg:text-right">
+            Canon EOS R5 · 01/2026
+          </p>
         </motion.div>
       </div>
 
       {/* scroll cue */}
       <div
-        className="hero-fade absolute inset-x-0 bottom-6 mx-auto w-max"
+        className="hero-fade absolute inset-x-0 bottom-8 mx-auto w-max"
         style={{ animationDelay: "0.8s" }}
         aria-hidden
       >
-        <Link
-          href="#work"
-          className="flex flex-col items-center gap-1 font-mono text-[9px] text-muted tracking-widest uppercase hover:text-[#10B981] transition-colors"
-        >
-          <span>MISSION_LOG</span>
-          <div className="flex h-10 w-5 items-start justify-center rounded border border-line p-1">
-            <span className="scroll-cue-dot block h-1.5 w-1 rounded-sm bg-[#10B981]" />
-          </div>
-        </Link>
+        <div className="flex h-12 w-6 items-start justify-center rounded-full border border-line p-1.5">
+          <span className="scroll-cue-dot block h-1.5 w-1 rounded-full bg-accent" />
+        </div>
       </div>
     </section>
   );

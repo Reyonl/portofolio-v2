@@ -87,24 +87,20 @@ export default function Skills() {
       className="relative overflow-hidden border-y border-line/60 bg-ink py-24 sm:py-32"
     >
       <div className="mx-auto mb-10 max-w-7xl px-5 sm:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-line pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] text-[#10B981] uppercase font-bold mb-2">
-              <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" />
-              <span>[SECTOR: 02 // TECH ARSENAL]</span>
-            </div>
-            <h2 className="font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] font-extrabold tracking-tight text-fg uppercase">
-              STACK <span className="text-[#10B981] font-mono text-[0.6em] tracking-normal font-normal">//</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] to-[#10B981]">EVIDENCE MATRIX</span>
+            <h2 className="font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] font-bold tracking-tight">
+              <MaskReveal>Stack & Evidence</MaskReveal>
             </h2>
             <p className="mt-3 font-mono text-xs text-muted">
-              Select any skill chip to inspect real GitHub commits, production builds, and verified implementations.
+              Click any technology chip below to inspect real repository proof & implementation details.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[#10B981] animate-ping" />
-            <span className="font-mono text-[11px] text-[#10B981] uppercase tracking-wider font-semibold bg-[#10B981]/10 px-2.5 py-1 rounded border border-[#10B981]/30">
-              ZERO FABRICATED CLAIMS
+            <span className="h-2 w-2 rounded-full bg-accent animate-ping" />
+            <span className="font-mono text-[11px] text-accent uppercase tracking-wider">
+              Zero fabricated claims
             </span>
           </div>
         </div>

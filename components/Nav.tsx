@@ -36,60 +36,40 @@ export default function Nav() {
       transition={{ duration: DUR.slow, ease: EASE, delay: 0.2 }}
       className="fixed inset-x-0 top-0 z-50"
     >
-      {/* Top indicator banner */}
-      <div className="border-b border-line/60 bg-[#07090E]/90 backdrop-blur-md px-3 py-1 font-mono text-[10px] tracking-[0.16em] text-muted">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-2 sm:px-8">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-[#10B981] shadow-[0_0_8px_#10B981] animate-pulse" />
-            <span className="text-[#10B981] font-semibold">ONLINE [SERVER: JKT-WIB]</span>
-          </div>
-          <div className="hidden sm:inline-flex items-center gap-2 text-fg/80">
-            <span>•</span>
-            <span>MATCHMAKING: <span className="text-[#F59E0B] font-semibold">OPEN FOR FULL-TIME / FREELANCE</span></span>
-          </div>
-          <div className="text-muted tracking-wider">
-            <span className="hidden sm:inline mr-2">•</span>
-            <span className="text-fg/70 font-medium">LVL 22 / INFORMATICS ENG</span>
-          </div>
-        </div>
-      </div>
-
       <div
         className={`mx-auto flex max-w-7xl items-center justify-between px-5 transition-all duration-300 sm:px-8 ${
           scrolled
-            ? "border-b border-line/70 bg-[#090A0F]/90 py-2.5 backdrop-blur-md"
-            : "py-4"
+            ? "border-b border-line/60 bg-ink/80 py-3 backdrop-blur-md"
+            : "py-5"
         }`}
       >
         <Link
           href="#top"
-          className="font-mono text-xs tracking-[0.22em] text-fg uppercase flex items-center gap-1.5"
+          className="font-mono text-xs tracking-[0.2em] text-fg uppercase"
         >
-          <span className="text-[#10B981] font-bold">⌁</span>
-          <span>reyon<span className="text-[#F59E0B]">.</span></span>
-          <span className="hidden sm:inline text-[9px] text-muted/60 tracking-widest font-normal">[HUD_V2]</span>
+          reyon<span className="text-accent">.</span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="group relative font-mono text-[11px] tracking-[0.15em] text-muted uppercase transition-colors hover:text-[#10B981]"
+              className="group relative font-mono text-[11px] tracking-[0.15em] text-muted uppercase transition-colors hover:text-fg"
             >
               {item.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-[#10B981] transition-all duration-300 group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
 
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
-            className="flex items-center gap-1.5 rounded border border-line bg-panel2/80 px-2.5 py-1 font-mono text-[10px] text-muted tracking-wider hover:border-[#10B981] hover:text-fg transition-colors"
+            className="flex items-center gap-1.5 rounded-full border border-line bg-panel/70 px-3 py-1 font-mono text-[10px] text-muted tracking-wider hover:border-accent hover:text-fg transition-colors"
             title="Open Command Palette (Cmd + K)"
           >
             <span>Search</span>
-            <kbd className="rounded bg-panel px-1 py-0.2 border border-line text-[9px] text-[#F59E0B]">⌘K</kbd>
+            <kbd className="rounded bg-panel2 px-1 py-0.2 border border-line text-[9px] text-accent">⌘K</kbd>
           </button>
 
           <button
@@ -98,10 +78,10 @@ export default function Nav() {
               toggleSound();
               window.dispatchEvent(new CustomEvent("sfx-toggle"));
             }}
-            className={`flex items-center gap-1.5 rounded border px-2.5 py-1 font-mono text-[10px] tracking-wider transition-colors ${
+            className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[10px] tracking-wider transition-colors ${
               soundOn
-                ? "border-[#F59E0B]/80 bg-[#F59E0B]/15 text-[#F59E0B] shadow-[0_0_10px_rgba(245,158,11,0.2)]"
-                : "border-line bg-panel2/80 text-muted hover:border-[#F59E0B] hover:text-fg"
+                ? "border-accent/80 bg-accent/15 text-accent shadow-[0_0_10px_rgba(255,138,61,0.2)]"
+                : "border-line bg-panel/70 text-muted hover:border-accent hover:text-fg"
             }`}
             title="Toggle tactile sound effects"
           >
@@ -110,9 +90,9 @@ export default function Nav() {
 
           <a
             href="mailto:liurey55@gmail.com"
-            className="rounded border border-[#F59E0B]/80 bg-[#F59E0B]/15 px-3.5 py-1.5 font-mono text-[11px] tracking-[0.15em] text-[#F59E0B] font-bold uppercase transition-all duration-200 hover:bg-[#F59E0B] hover:text-[#090A0F] hover:shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+            className="rounded-full border border-line px-4 py-1.5 font-mono text-[11px] tracking-[0.12em] text-fg uppercase transition-colors hover:border-accent hover:text-accent"
           >
-            HIRE [READY]
+            Hire
           </a>
         </nav>
 
@@ -178,21 +158,12 @@ export default function Nav() {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="block min-h-[44px] py-2.5 font-mono text-sm tracking-widest text-muted uppercase hover:text-[#10B981] flex items-center"
+                    className="block min-h-[44px] py-2.5 font-mono text-sm tracking-widest text-muted uppercase hover:text-accent flex items-center"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
-                <a
-                  href="mailto:liurey55@gmail.com"
-                  onClick={() => setOpen(false)}
-                  className="flex w-full items-center justify-center rounded border border-[#F59E0B]/80 bg-[#F59E0B]/15 py-3 font-mono text-sm tracking-widest text-[#F59E0B] font-bold uppercase transition-colors hover:bg-[#F59E0B] hover:text-[#090A0F]"
-                >
-                  HIRE [READY]
-                </a>
-              </li>
             </ul>
           </motion.nav>
         )}

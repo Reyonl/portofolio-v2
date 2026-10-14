@@ -1,17 +1,14 @@
 @import "tailwindcss";
 
-/* ── Design tokens — "Programmer-Gamer & Tactical Sci-Fi HUD" ────── */
+/* ── Design tokens — "quiet dark, one signal" ───────────────────── */
 @theme {
-  --color-ink: #090A0F;
-  --color-panel: #0B0C10;
-  --color-panel2: #12151F;
-  --color-panel3: #181E2B;
-  --color-line: #1F2839;
-  --color-fg: #E6EDF3;
-  --color-muted: #8292A6;
-  --color-accent: #F59E0B;
-  --color-cyber-green: #10B981;
-  --color-hud-amber: #F59E0B;
+  --color-ink: #07090d;
+  --color-panel: #0f1218;
+  --color-panel2: #141a24;
+  --color-line: #1d2430;
+  --color-fg: #e9edf3;
+  --color-muted: #8b94a4;
+  --color-accent: #ff8a3d;
 
   --font-display: var(--font-bricolage);
   --font-sans: var(--font-inter);
@@ -29,19 +26,15 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overscroll-behavior-y: none;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 36px 36px;
 }
 
 ::selection {
-  background: #10B981;
-  color: #090A0F;
+  background: var(--color-accent);
+  color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-cyber-green);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -229,86 +222,3 @@ html.lenis body {
   background-repeat: repeat;
   background-size: 48px 48px;
 }
-
-/* ── Tactical HUD & Gamer aesthetics ────────────────────────────── */
-.hud-corner-bracket {
-  position: relative;
-}
-.hud-corner-bracket::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid var(--color-cyber-green);
-  border-left: 2px solid var(--color-cyber-green);
-  pointer-events: none;
-  z-index: 20;
-}
-.hud-corner-bracket::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  right: -1px;
-  width: 12px;
-  height: 12px;
-  border-bottom: 2px solid var(--color-cyber-green);
-  border-right: 2px solid var(--color-cyber-green);
-  pointer-events: none;
-  z-index: 20;
-}
-
-.hud-corner-bracket-amber::before {
-  border-color: var(--color-accent);
-}
-.hud-corner-bracket-amber::after {
-  border-color: var(--color-accent);
-}
-
-@keyframes hud-scanline-anim {
-  0% {
-    top: 0%;
-    opacity: 0.7;
-  }
-  50% {
-    opacity: 0.95;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
-}
-
-.hud-scanner {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.8), rgba(245, 158, 11, 0.8), transparent);
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.7);
-  animation: hud-scanline-anim 5s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 25;
-}
-
-.hud-meter-green {
-  background: repeating-linear-gradient(
-    90deg,
-    #10B981,
-    #10B981 6px,
-    transparent 6px,
-    transparent 9px
-  );
-}
-
-.hud-meter-amber {
-  background: repeating-linear-gradient(
-    90deg,
-    #F59E0B,
-    #F59E0B 6px,
-    transparent 6px,
-    transparent 9px
-  );
-}
-

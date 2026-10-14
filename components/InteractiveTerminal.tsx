@@ -245,22 +245,21 @@ export default function InteractiveTerminal() {
   };
 
   return (
-    <div className="w-full overflow-hidden rounded-xl border border-line bg-[#090A0F] font-mono shadow-2xl shadow-black/80">
+    <div className="w-full overflow-hidden rounded-2xl border border-line bg-[#080b10] font-mono shadow-2xl shadow-black/80">
       {/* Terminal Title Bar */}
-      <div className="flex items-center justify-between border-b border-line/70 bg-[#0B0C10] px-4 py-3">
+      <div className="flex items-center justify-between border-b border-line/70 bg-[#0d1117] px-4 py-3">
         <div className="flex items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-[#ff5f56]/90 transition-opacity hover:opacity-100" />
           <span className="h-3 w-3 rounded-full bg-[#ffbd2e]/90 transition-opacity hover:opacity-100" />
           <span className="h-3 w-3 rounded-full bg-[#27c93f]/90 transition-opacity hover:opacity-100" />
           <span className="ml-2 font-mono text-[11px] text-muted">
-            hermes-devops@terminal: ~ (interactive zsh CLI) <span className="text-[#10B981] hidden sm:inline">[Press ~ to toggle]</span>
+            hermes-devops@terminal: ~ (interactive CLI)
           </span>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="rounded bg-[#10B981]/15 px-2 py-0.5 text-[10px] text-[#10B981] font-semibold border border-[#10B981]/40 flex items-center gap-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
-            ENGINE_VERIFIED
+          <span className="rounded bg-panel px-2 py-0.5 text-[10px] text-accent border border-line">
+            LIVE ENGINE
           </span>
           <button
             type="button"
@@ -277,9 +276,9 @@ export default function InteractiveTerminal() {
       </div>
 
       {/* Preset Command Quick-Pills */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-line/40 bg-[#07090E] px-4 py-2 text-xs">
-        <span className="text-[10px] text-[#F59E0B] tracking-wider uppercase mr-1 font-bold">
-          [RUN_PRESET]:
+      <div className="flex flex-wrap items-center gap-2 border-b border-line/40 bg-ink/60 px-4 py-2 text-xs">
+        <span className="text-[10px] text-muted tracking-wider uppercase mr-1">
+          Quick Run:
         </span>
         {PRESET_COMMANDS.map((p) => (
           <button
@@ -289,9 +288,9 @@ export default function InteractiveTerminal() {
               playClick(720, 0.03);
               executeCommand(p.cmd);
             }}
-            className="rounded border border-line bg-panel2/80 px-2.5 py-1 text-[10px] text-fg/80 transition-colors hover:border-[#10B981] hover:text-[#10B981] hover:bg-panel2 flex items-center gap-1"
+            className="rounded-full border border-line/70 bg-panel/70 px-2.5 py-1 text-[10px] text-fg/80 transition-colors hover:border-accent hover:text-accent hover:bg-panel2 flex items-center gap-1"
           >
-            <span className="text-[#10B981] font-bold">$</span> {p.label}
+            <span className="text-accent font-bold">$</span> {p.label}
           </button>
         ))}
       </div>
@@ -299,15 +298,15 @@ export default function InteractiveTerminal() {
       {/* Terminal Body */}
       <div
         ref={terminalBodyRef}
-        className="max-h-[380px] min-h-[260px] overflow-y-auto p-4 sm:p-5 text-xs leading-relaxed space-y-3.5 bg-[#090A0F]"
+        className="max-h-[380px] min-h-[260px] overflow-y-auto p-4 sm:p-5 text-xs leading-relaxed space-y-3.5"
         onClick={() => inputRef.current?.focus()}
       >
         {history.map((line) => {
           if (line.type === "command") {
             return (
               <div key={line.id} className="flex items-center gap-2 text-fg font-medium">
-                <span className="text-[#10B981] font-bold">➜</span>
-                <span className="text-[#F59E0B]">~</span>
+                <span className="text-accent font-bold">➜</span>
+                <span className="text-muted/80">~</span>
                 <span className="text-fg">{line.content}</span>
               </div>
             );
@@ -324,9 +323,9 @@ export default function InteractiveTerminal() {
           return (
             <div
               key={line.id}
-              className={`rounded-lg border border-line/50 bg-[#0B0C10] p-3 ${
+              className={`rounded-lg border border-line/40 bg-panel/40 p-3 ${
                 line.type === "error"
-                  ? "border-[#F59E0B]/40 text-amber-200"
+                  ? "border-amber-500/30 text-amber-200"
                   : "text-fg/90"
               }`}
             >
@@ -335,12 +334,12 @@ export default function InteractiveTerminal() {
                   <span
                     className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider ${
                       line.badgeColor === "green"
-                        ? "bg-emerald-950/80 text-[#10B981] border border-emerald-800/40"
+                        ? "bg-emerald-950/80 text-emerald-400 border border-emerald-800/40"
                         : line.badgeColor === "cyan"
                         ? "bg-cyan-950/80 text-cyan-400 border border-cyan-800/40"
                         : line.badgeColor === "purple"
                         ? "bg-purple-950/80 text-purple-400 border border-purple-800/40"
-                        : "bg-amber-950/80 text-[#F59E0B] border border-amber-800/40"
+                        : "bg-amber-950/80 text-amber-400 border border-amber-800/40"
                     }`}
                   >
                     {line.badge}
@@ -356,16 +355,16 @@ export default function InteractiveTerminal() {
 
         {isExecuting && (
           <div className="flex items-center gap-2 text-muted text-[11px] animate-pulse">
-            <span className="inline-block h-2 w-2 rounded-full bg-[#10B981]" />
+            <span className="inline-block h-2 w-2 rounded-full bg-accent" />
             Executing command via pipeline...
           </div>
         )}
       </div>
 
       {/* Terminal Input Bar */}
-      <div className="flex items-center border-t border-line/70 bg-[#0B0C10] px-4 py-2.5">
-        <span className="text-[#10B981] font-bold mr-2">➜</span>
-        <span className="text-[#F59E0B] mr-2 text-xs font-bold">~</span>
+      <div className="flex items-center border-t border-line/70 bg-[#0d1117] px-4 py-2.5">
+        <span className="text-accent font-bold mr-2">➜</span>
+        <span className="text-muted mr-2 text-xs">~</span>
         <input
           ref={inputRef}
           type="text"
@@ -379,7 +378,7 @@ export default function InteractiveTerminal() {
           disabled={isExecuting}
           className="w-full bg-transparent font-mono text-xs text-fg placeholder:text-muted/50 focus:outline-none"
         />
-        <span className="rounded bg-panel2 px-1.5 py-0.5 text-[9px] text-[#F59E0B] border border-line">
+        <span className="rounded bg-panel2 px-1.5 py-0.5 text-[9px] text-muted border border-line">
           ↵ ENTER
         </span>
       </div>
