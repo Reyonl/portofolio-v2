@@ -5,6 +5,8 @@ import ProjectHeader from "@/components/ProjectHeader";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import ProjectMicroPreview from "@/components/ProjectMicroPreview";
 import { getProject, projects } from "@/data/projects";
+import { profile } from "@/data/site";
+import { SITE_URL } from "@/lib/siteUrl";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -18,12 +20,43 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return { title: "Not found" };
+
+  const pageUrl = `${SITE_URL}/work/${project.slug}`;
+  const ogImageUrl = `${SITE_URL}${project.image.src}`;
+
   return {
     title: project.title,
     description: project.blurb,
+    alternates: {
+      canonical: `/work/${project.slug}`,
+    },
+    keywords: [
+      project.title,
+      ...project.stack,
+      project.category,
+      "Reyon Lau Jiemin",
+      "Software Engineering Case Study",
+    ],
     openGraph: {
+      type: "article",
+      url: pageUrl,
       title: `${project.title} — Reyon Lau Jiemin`,
       description: project.blurb,
+      images: [
+        {
+          url: ogImageUrl,
+          width: project.image.width,
+          height: project.image.height,
+          alt: project.image.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Reyon Lau Jiemin`,
+      description: project.blurb,
+      images: [ogImageUrl],
+      creator: "@Reyonl",
     },
   };
 }
@@ -37,8 +70,57 @@ export default async function ProjectPage({
   const project = getProject(slug);
   if (!project) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE_URL}/work/${project.slug}/#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Selected Work",
+            item: `${SITE_URL}/#work`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: project.title,
+            item: `${SITE_URL}/work/${project.slug}`,
+          },
+        ],
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${SITE_URL}/work/${project.slug}/#software`,
+        name: project.title,
+        description: project.detail,
+        applicationCategory: project.category,
+        operatingSystem: "Web / Cross-Platform",
+        author: {
+          "@type": "Person",
+          name: "Reyon Lau Jiemin",
+          url: SITE_URL,
+        },
+        ...(project.repo?.url ? { codeRepository: project.repo.url } : {}),
+        ...(project.release ? { downloadUrl: project.release } : {}),
+      },
+    ],
+  };
+
   return (
     <main className="px-5 pt-28 pb-24 sm:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mx-auto max-w-5xl">
         <Link
           href="/#work"
@@ -92,7 +174,7 @@ export default async function ProjectPage({
             ← Back to Selected Work
           </Link>
           <a
-            href="mailto:liurey55@gmail.com"
+            href={`mailto:${profile.links.email}`}
             className="min-h-[44px] inline-flex items-center rounded-full bg-accent px-5 py-2 font-mono text-xs font-bold text-ink uppercase"
           >
             Inquire About This Project

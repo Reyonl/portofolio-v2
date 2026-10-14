@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { profile } from "@/data/site";
 
 interface CommitEvent {
   id: string;
@@ -90,13 +91,13 @@ export default function GitHubActivity() {
               </span>
             </h3>
             <span className="font-mono text-[11px] text-muted">
-              @Reyonl • 45 Public Repos
+              @{profile.links.githubHandle} • 45 Public Repos
             </span>
           </div>
         </div>
 
         <a
-          href="https://github.com/Reyonl"
+          href={profile.links.github}
           target="_blank"
           rel="noreferrer noopener"
           className="self-start sm:self-center font-mono text-xs text-accent hover:underline flex items-center gap-1 min-h-[44px]"

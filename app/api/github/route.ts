@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { profile } from "@/data/site";
 
 export const revalidate = 1800; // 30 minutes ISR cache
 
@@ -14,24 +15,25 @@ interface GitHubEvent {
 }
 
 export async function GET() {
+  const username = profile.links.githubHandle;
   const fallbackEvents = [
     {
       id: "fallback-1",
-      repo: "Reyonl/portofolio-v2",
+      repo: `${username}/portofolio-v2`,
       type: "PushEvent",
       message: "feat: add command palette, dual CV selector and architecture diagrams",
       createdAt: new Date().toISOString(),
     },
     {
       id: "fallback-2",
-      repo: "Reyonl/threads-it-carousel",
+      repo: `${username}/threads-it-carousel`,
       type: "PushEvent",
       message: "refactor: optimize layout components and automated pipeline",
       createdAt: new Date(Date.now() - 86400000).toISOString(),
     },
     {
       id: "fallback-3",
-      repo: "Reyonl/rekapan_bukunota",
+      repo: `${username}/rekapan_bukunota`,
       type: "PushEvent",
       message: "perf: optimize daily bon ledger query and cigarette sales filter",
       createdAt: new Date(Date.now() - 172800000).toISOString(),
@@ -39,11 +41,17 @@ export async function GET() {
   ];
 
   try {
-    const res = await fetch("https://api.github.com/users/Reyonl/events/public?per_page=6", {
-      headers: {
-        "User-Agent": "Portfolio-App",
-        Accept: "application/vnd.github.v3+json",
-      },
+    const headers: Record<string, string> = {
+      "User-Agent": "Portfolio-App",
+      Accept: "application/vnd.github.v3+json",
+    };
+
+    if (process.env.GITHUB_TOKEN) {
+      headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+    }
+
+    const res = await fetch(`https://api.github.com/users/${username}/events/public?per_page=6`, {
+      headers,
       next: { revalidate: 1800 },
     });
 
@@ -51,8 +59,7 @@ export async function GET() {
       return NextResponse.json({
         success: true,
         isFallback: true,
-        username: "Reyonl",
-        publicRepos: 45,
+        username,
         events: fallbackEvents,
       });
     }
@@ -63,7 +70,8 @@ export async function GET() {
       .slice(0, 4)
       .map((e) => {
         const commitMsg =
-          e.payload?.commits?.[0]?.message ?? `Pushed to ${e.payload?.ref?.replace("refs/heads/", "") || "main"}`;
+          e.payload?.commits?.[0]?.message ??
+          `Pushed to ${e.payload?.ref?.replace("refs/heads/", "") || "main"}`;
         return {
           id: e.id,
           repo: e.repo.name,
@@ -76,16 +84,14 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       isFallback: false,
-      username: "Reyonl",
-      publicRepos: 45,
+      username,
       events: pushEvents.length > 0 ? pushEvents : fallbackEvents,
     });
   } catch {
     return NextResponse.json({
       success: true,
       isFallback: true,
-      username: "Reyonl",
-      publicRepos: 45,
+      username,
       events: fallbackEvents,
     });
   }

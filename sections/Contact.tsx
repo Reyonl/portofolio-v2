@@ -4,7 +4,7 @@ import { useState } from "react";
 import MaskReveal from "@/components/MaskReveal";
 import Magnetic from "@/components/Magnetic";
 import { RevealFade, RevealGroup, RevealItem } from "@/components/Reveal";
-import { contactLinks } from "@/data/site";
+import { contactLinks, profile } from "@/data/site";
 import DualCvSelector from "@/components/DualCvSelector";
 
 /**
@@ -15,7 +15,7 @@ export default function Contact() {
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText("liurey55@gmail.com");
+      await navigator.clipboard.writeText(profile.links.email);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -112,7 +112,7 @@ export default function Contact() {
             onClick={copyEmail}
             className="mt-10 min-h-[44px] inline-flex items-center font-mono text-xs tracking-[0.18em] text-muted uppercase transition-colors hover:text-accent focus:outline-none"
           >
-            {copied ? "copied to clipboard ✓" : "copy email → liurey55@gmail.com"}
+            {copied ? "copied to clipboard ✓" : `copy email → ${profile.links.email}`}
           </button>
         </RevealFade>
       </div>

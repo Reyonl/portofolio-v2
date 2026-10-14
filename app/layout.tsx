@@ -3,10 +3,7 @@ import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import CommandPalette from "@/components/CommandPalette";
 import "./globals.css";
 
-// Canonical URL: set NEXT_PUBLIC_SITE_URL at deploy time. The placeholder
-// keeps metadata absolute locally and is a tracked TODO — the domain itself
-// is deliberately PENDING until launch.
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.invalid";
+import { SITE_URL } from "@/lib/siteUrl";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -30,7 +27,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Reyon Lau Jiemin — Junior Developer",
     template: "%s — Reyon Lau Jiemin",
@@ -40,24 +37,36 @@ export const metadata: Metadata = {
   keywords: [
     "Reyon Lau Jiemin",
     "Junior Developer",
-    "Laravel",
-    "PHP",
-    "Next.js",
+    "Junior Software Developer",
+    "Web Developer Indonesia",
+    "Laravel Developer",
+    "PHP Developer",
+    "Next.js Developer",
     "React",
+    "TypeScript",
+    "Full Stack Developer",
+    "BNSP Web Programmer",
+    "Universitas Pamulang",
     "Portfolio",
   ],
   authors: [{ name: "Reyon Lau Jiemin", url: "https://github.com/Reyonl" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Reyon Lau Jiemin — Junior Developer",
-    description:
-      "Laravel at home. Next.js on the way up. Real projects, shipped.",
     type: "website",
     locale: "en_US",
+    url: SITE_URL,
+    siteName: "Reyon Lau Jiemin — Portfolio",
+    title: "Reyon Lau Jiemin — Junior Developer",
+    description:
+      "Fresh Informatics Engineering graduate (Universitas Pamulang, 2026). PHP + Laravel at home, React + Next.js on the way up. Real shipped projects.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Reyon Lau Jiemin — Junior Developer",
-    description: "Laravel at home. Next.js on the way up.",
+    description: "PHP + Laravel at home, React + Next.js on the way up. Real projects, shipped.",
+    creator: "@Reyonl",
   },
   robots: { index: true, follow: true },
 };
@@ -69,13 +78,27 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "ProfilePage",
+        "@id": `${SITE_URL}/#profilepage`,
+        url: SITE_URL,
+        name: "Reyon Lau Jiemin — Developer Profile",
+        mainEntity: {
+          "@id": `${SITE_URL}/#person`,
+        },
+      },
+      {
         "@type": "Person",
-        "@id": `${BASE}/#person`,
+        "@id": `${SITE_URL}/#person`,
         name: "Reyon Lau Jiemin",
         givenName: "Reyon",
         familyName: "Lau Jiemin",
-        url: BASE,
+        url: SITE_URL,
         jobTitle: "Junior Software Developer",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Jakarta",
+          addressCountry: "ID",
+        },
         alumniOf: {
           "@type": "CollegeOrUniversity",
           name: "Universitas Pamulang",
@@ -111,13 +134,13 @@ export default function RootLayout({
       },
       {
         "@type": "WebSite",
-        "@id": `${BASE}/#website`,
-        url: BASE,
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
         name: "Reyon Lau Jiemin — Portfolio",
         description:
           "Fresh Informatics Engineering graduate (Universitas Pamulang, 2026). Laravel at home, Next.js on the way up. Real shipped projects.",
         author: {
-          "@id": `${BASE}/#person`,
+          "@id": `${SITE_URL}/#person`,
         },
       },
     ],
