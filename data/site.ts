@@ -21,6 +21,7 @@ export const profile = {
   graduation: "07/2026",
   certification: "BNSP Certified Web Programmer (10 April 2026, valid 3 years)",
   tagline: "I ship real projects fast — Laravel at home, Next.js on the way up.",
+  topBanner: "🟢 ONLINE [SERVER: JKT-WIB] • MATCHMAKING: OPEN FOR FULL-TIME / FREELANCE • LVL 22 / INFORMATICS ENG",
   codedSince: 2022,
   links: {
     email: "liurey55@gmail.com",
@@ -30,11 +31,11 @@ export const profile = {
 } as const;
 
 export const nav = [
-  { label: "Work", href: "#work" },
-  { label: "Terminal", href: "#terminal" },
-  { label: "Stack", href: "#stack" },
-  { label: "Journey", href: "#journey" },
-  { label: "Contact", href: "#contact" },
+  { label: "WORK [01]", href: "#work" },
+  { label: "TERMINAL [02]", href: "#terminal" },
+  { label: "STACK [03]", href: "#stack" },
+  { label: "JOURNEY [04]", href: "#journey" },
+  { label: "CONTACT [05]", href: "#contact" },
 ] as const;
 
 export const contactLinks: ContactLink[] = [

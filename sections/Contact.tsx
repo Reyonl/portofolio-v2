@@ -26,14 +26,18 @@ export default function Contact() {
   return (
     <section id="contact" className="relative px-5 py-28 sm:px-8 sm:py-36">
       <div className="mx-auto max-w-7xl">
-        <h2 className="font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.88] font-bold tracking-[-0.03em]">
-          <MaskReveal>Let&apos;s build</MaskReveal>
-          <MaskReveal order={1} className="text-accent">
-            something real.
+        <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] text-[#10B981] uppercase font-bold mb-3">
+          <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" />
+          <span>[SECTOR: 04 // COMMS & SIGNALS]</span>
+        </div>
+        <h2 className="font-display text-[clamp(2.5rem,8vw,6.5rem)] leading-[0.88] font-extrabold tracking-[-0.03em] uppercase">
+          <MaskReveal>LET&apos;S BUILD</MaskReveal>
+          <MaskReveal order={1} className="text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] to-[#10B981]">
+            SOMETHING REAL.
           </MaskReveal>
         </h2>
-        <RevealFade className="mt-6 max-w-md text-muted">
-          Open to junior developer roles and freelance Laravel work.
+        <RevealFade className="mt-6 max-w-md text-muted font-mono text-sm">
+          Open to junior developer roles and freelance Laravel work. Server JKT-WIB ready.
         </RevealFade>
 
         {/* Dual CV Selector Hub */}

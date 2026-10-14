@@ -48,30 +48,36 @@ export default function Projects() {
   });
 
   return (
-    <section id="work" className="relative px-5 py-28 sm:px-8 sm:py-36">
+    <section id="work" className="relative px-5 py-24 sm:px-8 sm:py-32">
       <div className="mx-auto max-w-7xl">
-        <header className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <header className="mb-12 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between border-b border-line pb-6">
           <div>
-            <h2 className="font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] font-bold tracking-tight">
-              <MaskReveal>Selected</MaskReveal>
-              <MaskReveal order={1}>work</MaskReveal>
+            <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] text-[#10B981] uppercase font-bold mb-2">
+              <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" />
+              <span>[SECTOR: 01 // DEPLOYED ASSETS]</span>
+            </div>
+            <h2 className="font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] font-extrabold tracking-tight text-fg uppercase">
+              MISSIONS LOG <span className="text-[#10B981] font-mono text-[0.6em] tracking-normal font-normal">//</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] to-[#10B981]">SELECTED WORK</span>
             </h2>
-            <p className="mt-3 text-muted text-sm max-w-md">
-              Real shipped products and developer tools with tested pipelines.
+            <p className="mt-3 text-muted text-sm max-w-xl font-mono">
+              Proven production systems, developer toolchains, and real-world clients with tested pipelines.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-[11px] tracking-[0.25em] text-muted uppercase">
-              {filteredProjects.length.toString().padStart(2, "0")} shown · 00 invented
+          <div className="flex flex-col items-start sm:items-end gap-1.5 font-mono text-[11px] tracking-wider text-muted">
+            <span className="text-[#10B981] font-semibold bg-[#10B981]/10 px-2.5 py-1 rounded border border-[#10B981]/30">
+              [STATUS: 04 / 04 VERIFIED]
+            </span>
+            <span className="text-[10px] text-muted/80">
+              {filteredProjects.length.toString().padStart(2, "0")} DISPLAYED &bull; 00 FABRICATED
             </span>
           </div>
         </header>
 
-        {/* Stack Filter Chips with Framer Motion layoutId */}
-        <div className="mb-10 flex flex-wrap items-center gap-2 border-b border-line pb-6">
-          <span className="mr-2 font-mono text-[11px] uppercase tracking-wider text-muted">
-            Filter:
+        {/* Tactical Stack Filter Chips with Framer Motion layoutId */}
+        <div className="mb-10 flex flex-wrap items-center gap-2">
+          <span className="mr-2 font-mono text-[11px] uppercase tracking-wider text-muted font-bold">
+            [FILTER]:
           </span>
           {FILTERS.map((filter) => {
             const isActive = activeFilter === filter;
@@ -80,16 +86,16 @@ export default function Projects() {
                 key={filter}
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={`relative min-h-[44px] rounded-full px-4 py-2 font-mono text-xs tracking-wider transition-colors duration-200 focus:outline-none flex items-center justify-center ${
+                className={`relative min-h-[40px] rounded px-3.5 py-1.5 font-mono text-xs tracking-wider transition-colors duration-200 focus:outline-none flex items-center justify-center ${
                   isActive
-                    ? "text-ink font-semibold"
-                    : "text-muted hover:text-fg bg-panel border border-line"
+                    ? "text-[#090A0F] font-bold"
+                    : "text-muted hover:text-fg bg-panel2/80 border border-line hover:border-[#10B981]/50"
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="activeFilterPill"
-                    className="absolute inset-0 rounded-full bg-accent"
+                    className="absolute inset-0 rounded bg-[#10B981] shadow-[0_0_12px_rgba(16,185,129,0.4)]"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -122,7 +128,7 @@ export default function Projects() {
                   onMouseEnter={() => setHoveredSlug(p.slug)}
                   onMouseLeave={() => setHoveredSlug(null)}
                 >
-                  <div className="group relative block overflow-hidden rounded-2xl border border-line bg-panel transition-colors duration-300 hover:border-accent/50">
+                  <div className="hud-corner-bracket group relative block overflow-hidden rounded-xl border border-line bg-[#0B0C10] transition-colors duration-300 hover:border-[#10B981]/50">
                     <Link
                       href={`/work/${p.slug}`}
                       className="block focus:outline-none"
@@ -148,9 +154,9 @@ export default function Projects() {
                           priority={i === 0}
                           loading={i === 0 ? undefined : "lazy"}
                           decoding="async"
-                          className="object-cover object-top brightness-[0.85] saturate-[0.9] transition-[transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-hover:brightness-100 group-hover:saturate-100"
+                          className="object-cover object-top brightness-[0.80] saturate-[0.85] transition-[transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-hover:brightness-100 group-hover:saturate-100"
                         />
-                        <div className="absolute inset-x-0 bottom-0 h-4/5 bg-gradient-to-t from-ink from-45% via-ink/80 to-transparent" />
+                        <div className="absolute inset-x-0 bottom-0 h-4/5 bg-gradient-to-t from-[#090A0F] from-40% via-[#090A0F]/85 to-transparent" />
 
                         {/* Interactive Micro-loop Preview Overlay */}
                         {(isHovered || isPreviewing) && (
@@ -171,34 +177,41 @@ export default function Projects() {
                       </motion.div>
 
                       {/* Header Overlays */}
-                      <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-5 z-30">
-                        <span className="font-mono text-[11px] text-accent font-semibold">
-                          {p.index}
+                      <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-4 sm:p-5 z-30">
+                        <span className="font-mono text-xs text-[#F59E0B] font-bold bg-[#090A0F]/80 px-2 py-0.5 rounded border border-[#F59E0B]/30">
+                          MISSION {p.index}
                         </span>
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-[10px] tracking-[0.22em] text-muted uppercase">
-                            {p.category}
-                          </span>
+                          {p.slug === "hermes-devops" ? (
+                            <span className="font-mono text-[9px] tracking-wider text-[#10B981] font-bold bg-[#10B981]/15 border border-[#10B981]/40 px-2 py-0.5 rounded flex items-center gap-1">
+                              <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                              [EVIDENCE VERIFIED]
+                            </span>
+                          ) : (
+                            <span className="font-mono text-[9px] tracking-wider text-[#10B981] font-bold bg-[#10B981]/15 border border-[#10B981]/40 px-2 py-0.5 rounded">
+                              [STATUS: CLEARED]
+                            </span>
+                          )}
                         </div>
                       </div>
 
                       {/* Content Bottom */}
                       <div className="relative z-30 p-5 sm:p-7">
                         <div className="flex items-start justify-between gap-4">
-                          <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl text-fg">
-                            {p.title}
+                          <h3 className="font-display text-xl font-bold tracking-tight sm:text-2xl text-fg uppercase">
+                            MISSION {p.index} <span className="text-[#10B981] font-mono text-base">//</span> {p.title}
                           </h3>
                         </div>
 
-                        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+                        <p className="mt-2 max-w-xl text-sm leading-relaxed text-[#8E9CAE] font-sans">
                           {p.blurb}
                         </p>
 
-                        <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+                        <div className="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-2">
                           {p.stack.slice(0, 5).map((s) => (
                             <span
                               key={s}
-                              className="font-mono text-[10px] tracking-wider text-fg/70 uppercase bg-panel2 px-2 py-0.5 rounded border border-line/60"
+                              className="font-mono text-[10px] tracking-wider text-fg/80 uppercase bg-panel2/90 px-2 py-0.5 rounded border border-line"
                             >
                               {s}
                             </span>
@@ -212,13 +225,13 @@ export default function Projects() {
                                 e.stopPropagation();
                                 setPreviewSlug(previewSlug === p.slug ? null : p.slug);
                               }}
-                              className="md:hidden rounded-full border border-line bg-panel2 px-2.5 py-1 font-mono text-[10px] text-accent flex items-center gap-1"
+                              className="md:hidden rounded border border-line bg-panel2 px-2.5 py-1 font-mono text-[10px] text-[#F59E0B] flex items-center gap-1"
                             >
                               {previewSlug === p.slug ? "Hide Preview" : "⚡ Micro Preview"}
                             </button>
 
-                            <span className="hidden translate-y-1 items-center gap-1 font-mono text-[10px] tracking-[0.2em] text-accent uppercase opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:flex">
-                              View detail
+                            <span className="hidden translate-y-1 items-center gap-1 font-mono text-[10px] tracking-[0.2em] text-[#10B981] uppercase opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:flex font-bold">
+                              OPEN MISSION DATA
                               <svg
                                 width="12"
                                 height="12"

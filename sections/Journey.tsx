@@ -24,13 +24,17 @@ export default function Journey() {
   return (
     <section id="journey" className="relative px-5 py-28 sm:px-8 sm:py-36">
       <div className="mx-auto max-w-5xl">
-        <header className="mb-16">
-          <p className="mb-3 font-mono text-[11px] tracking-[0.28em] text-accent uppercase">
-            {"// 2022 — now"}
-          </p>
-          <h2 className="font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] font-bold tracking-tight">
-            <MaskReveal>Journey</MaskReveal>
+        <header className="mb-16 border-b border-line pb-6">
+          <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] text-[#10B981] uppercase font-bold mb-2">
+            <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" />
+            <span>[SECTOR: 03 // TIMELINE LOGS]</span>
+          </div>
+          <h2 className="font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.9] font-extrabold tracking-tight text-fg uppercase">
+            JOURNEY <span className="text-[#10B981] font-mono text-[0.6em] tracking-normal font-normal">//</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] to-[#10B981]">CHRONOLOGY</span>
           </h2>
+          <p className="mt-2 font-mono text-xs text-muted">
+            Milestones, university education, BNSP certification, and shipped products from 2022 to present.
+          </p>
         </header>
 
         <div ref={ref} className="relative pl-8 sm:pl-14">
