@@ -113,6 +113,7 @@ export default function InteractiveTerminal() {
           "Reyon Lau Jiemin\n" +
           "• Role: Junior Software Developer\n" +
           "• Education: Universitas Pamulang (Informatics Engineering, 2026)\n" +
+          "• Experience: Pusdiklat BPS (Database Administrator & Creative Team Intern)\n" +
           "• Primary: Laravel, PHP 8.3, MySQL, Livewire, Flutter\n" +
           "• Ecosystem: Next.js, TypeScript, React, Node.js\n" +
           "• GitHub: https://github.com/Reyonl";
@@ -190,6 +191,8 @@ export default function InteractiveTerminal() {
           "Reyon Lau Jiemin — ATS CV Profile Summary:\n" +
           "• Available: Full-time Junior Developer / Freelance Laravel\n" +
           "• Formats: ATS PDF & DOCX (Bilingual: ID & EN)\n" +
+          "• Experience: Pusdiklat BPS (Database Administrator Intern, Jan-Mar 2026)\n" +
+          "• Certification: BNSP Certified Web Programmer (Apr 2026)\n" +
           "• Downloads available via /cv/Reyon-Lau-Jiemin-CV.pdf\n" +
           "• Verified Work: Midtrans payment webhooks, Laravel REST APIs, Next.js frontend";
         badge = "ATS READY";
