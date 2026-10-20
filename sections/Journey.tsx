@@ -55,11 +55,19 @@ export default function Journey() {
                   className="absolute top-1.5 -left-8 h-3 w-3 rounded-full border-2 border-accent bg-ink sm:-left-14"
                   style={{ marginLeft: -1 }}
                 />
-                <p className="font-mono text-[11px] tracking-[0.22em] text-accent uppercase">
-                  {m.date}
-                  {m.tag === "now" && (
-                    <span className="ml-3 rounded-full bg-accent/15 px-2.5 py-0.5 text-accent">
-                      today
+                <p className="font-mono text-[11px] tracking-[0.22em] text-accent uppercase flex items-center flex-wrap gap-2">
+                  <span>{m.date}</span>
+                  {m.tag && (
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 text-[10px] tracking-wider uppercase font-semibold ${
+                        m.tag === "now"
+                          ? "bg-accent/20 text-accent border border-accent/40"
+                          : m.tag === "internship" || m.tag === "cert"
+                          ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                          : "bg-panel2 text-fg/70 border border-line"
+                      }`}
+                    >
+                      {m.tag === "now" ? "today" : m.tag}
                     </span>
                   )}
                 </p>
