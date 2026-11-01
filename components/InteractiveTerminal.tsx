@@ -14,7 +14,7 @@ interface TerminalLine {
 const PRESET_COMMANDS = [
   { label: "hermes doctor", cmd: "hermes doctor", desc: "Check toolchains & environment health" },
   { label: "hermes status", cmd: "hermes status", desc: "Overview of registered projects" },
-  { label: "hermes init", cmd: "hermes init demo-app --dry-run", desc: "Preview Phase 8 project scaffolding" },
+  { label: "hermes test hermes", cmd: "hermes test hermes-devops", desc: "Run 249 specs across Phases 1–8" },
   { label: "hermes test daily-co", cmd: "hermes test daily-co", desc: "Run 46 tests against MySQL" },
   { label: "bnsp verify", cmd: "bnsp verify", desc: "Inspect BNSP Web Programmer credentials" },
   { label: "cat cv.summary", cmd: "cat cv.summary", desc: "View developer background profile" },
@@ -25,7 +25,7 @@ export default function InteractiveTerminal() {
     {
       id: "init-1",
       type: "system",
-      content: "Hermes DevOps v0.8.0 (x86_64-pc-windows / node v25.2)",
+      content: "Hermes DevOps v0.10.0 (x86_64-pc-windows / node v25.2)",
     },
     {
       id: "init-2",
@@ -114,7 +114,7 @@ export default function InteractiveTerminal() {
           "• Role: Junior Software Developer\n" +
           "• Education: Universitas Pamulang (Informatics Engineering, 2026)\n" +
           "• Experience: Pusdiklat BPS (Database Administrator & Creative Team Intern)\n" +
-          "• Primary: Laravel, PHP 8.3, MySQL, Livewire, Flutter\n" +
+          "• Primary: Laravel, PHP 8.3, MySQL, Filament, Livewire, Flutter\n" +
           "• Ecosystem: Next.js, TypeScript, React, Node.js\n" +
           "• GitHub: https://github.com/Reyonl";
         badge = "PERSON";
@@ -133,10 +133,11 @@ export default function InteractiveTerminal() {
       } else if (lower === "hermes status") {
         output =
           "Projects Registered in Hermes DevOps:\n" +
-          "  [01] hermes-devops    — TS CLI / Developer Automation (206 tests, v0.8.0)\n" +
-          "  [02] warung-lupi-web  — Laravel 11 / React Shared API (Live domain)\n" +
-          "  [03] daily-co         — Laravel Livewire + Fabric.js (46 CI tests)\n" +
-          "  [04] portofolio-v2    — Next.js 16 / React 19 (Provable Portfolio)\n" +
+          "  [01] saywed               — Laravel + Filament Wedding SaaS (live: saywed.my.id)\n" +
+          "  [02] hermes-devops        — TS CLI / Autonomous DevOps (249 tests, v0.10.0)\n" +
+          "  [03] warung-lupi-web      — Laravel 11 / React Ledger System (Live domain)\n" +
+          "  [04] warung-lupi-android  — Flutter + Cloud Firestore POS (v1.3.7 APK)\n" +
+          "  [05] daily-co             — Laravel Livewire + Fabric.js (46 CI tests)\n" +
           "Audit Trail: append-only log under ~/.config/hermes-devops/data/audit/";
         badge = "REGISTERED";
         badgeColor = "green";
@@ -164,14 +165,14 @@ export default function InteractiveTerminal() {
         badgeColor = "green";
       } else if (lower.includes("test") && lower.includes("hermes")) {
         output =
-          "Running hermes test engine:\n" +
+          "Running hermes test engine (v0.10.0):\n" +
           "  ✓ test/step-engine.test.ts (42 specs)\n" +
           "  ✓ test/gate-safety-model.test.ts (65 specs)\n" +
           "  ✓ test/detection-adapters.test.ts (51 specs)\n" +
+          "  ✓ test/auto-pipeline-dashboard.test.ts (51 specs)\n" +
           "  ✓ test/evidence-verifier.test.ts (40 specs)\n" +
-          "  ✓ test/init-ops.test.ts (8 specs)\n" +
-          "Suites: 5 passed, 5 total | Tests: 206 passed | Exit: 0";
-        badge = "206/206 PASS";
+          "Suites: 5 passed, 5 total | Tests: 249 passed | Exit: 0";
+        badge = "249/249 PASS";
         badgeColor = "green";
       } else if (lower.includes("bnsp")) {
         output =
@@ -194,7 +195,7 @@ export default function InteractiveTerminal() {
           "• Experience: Pusdiklat BPS (Database Administrator Intern, Jan-Mar 2026)\n" +
           "• Certification: BNSP Certified Web Programmer (Apr 2026)\n" +
           "• Downloads available via /cv/Reyon-Lau-Jiemin-CV.pdf\n" +
-          "• Verified Work: Midtrans payment webhooks, Laravel REST APIs, Next.js frontend";
+          "• Verified Work: SayWed SaaS (saywed.my.id), Warung Lupi ecosystem, Hermes DevOps";
         badge = "ATS READY";
         badgeColor = "cyan";
       } else {

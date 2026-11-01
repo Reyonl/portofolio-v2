@@ -18,9 +18,9 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "primary",
     status: "Primary Backend Framework",
     evidence:
-      "Core framework for DAILY.CO (46 tests in CI, Livewire canvas state) and Warung Lupi (shared REST API, transactions, reporting). Midtrans payment webhook integration in Gadai Enoni Cell.",
-    highlightTags: ["Eloquent ORM", "Artisan", "Pest/PHPUnit", "Sanctum", "FormRequests"],
-    projectSlug: "daily-co",
+      "Core framework for SayWed SaaS (saywed.my.id, dual Filament panels, Google OAuth, Telegram alerts), DAILY.CO (46 CI tests), and Warung Lupi.",
+    highlightTags: ["Eloquent ORM", "Filament 3", "Pest/PHPUnit", "Socialite", "FormRequests"],
+    projectSlug: "saywed",
   },
   PHP: {
     name: "PHP",
@@ -30,7 +30,7 @@ export const skillsData: Record<string, SkillDetail> = {
     evidence:
       "Daily backend development using PHP 8.3 features: constructor promotion, match expressions, typed properties, strict types, and robust exception handling.",
     highlightTags: ["PHP 8.3", "Composer", "PSR Standards", "OOP Architecture"],
-    projectSlug: "warung-lupi-web",
+    projectSlug: "saywed",
   },
   Livewire: {
     name: "Livewire",
@@ -38,8 +38,8 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "primary",
     status: "Reactive Fullstack Componentry",
     evidence:
-      "Powers the interactive order customization and admin approval dashboard in DAILY.CO. Coordinates reactive canvas events with backend models.",
-    highlightTags: ["Component Lifecycle", "Realtime Validation", "State Hydration"],
+      "Powers Filament 3 workspaces in SayWed and the interactive multi-zone canvas order customization dashboard in DAILY.CO.",
+    highlightTags: ["Component Lifecycle", "Filament Panels", "Realtime Validation", "State Hydration"],
     projectSlug: "daily-co",
   },
   MySQL: {
@@ -48,7 +48,7 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "primary",
     status: "Relational Database & Querying",
     evidence:
-      "Schema design, indexing on ledger transaction dates, and foreign key integrity across customer slips, cigarette inventories, and multi-tenant store tables.",
+      "Schema design, indexing on ledger transaction dates, and foreign key integrity across SayWed multi-tenant invitations, customer slips, and store tables.",
     highlightTags: ["Indexed Queries", "ACID Transactions", "Foreign Keys", "Migrations"],
     projectSlug: "warung-lupi-web",
   },
@@ -58,8 +58,9 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "primary",
     status: "Design System & Utility CSS",
     evidence:
-      "Crafted responsive UI systems for DAILY.CO, Warung Lupi, and this portfolio v2 with custom dark palette, amber glow tokens, and fluid typography clamps.",
-    highlightTags: ["v4 Alpha/Beta", "Fluid Typography", "Custom Color Tokens", "Responsive Grid"],
+      "Crafted responsive UI systems for SayWed (6 editorial & traditional wedding themes), DAILY.CO, Warung Lupi, and this portfolio v2 with Tailwind CSS v4.",
+    highlightTags: ["Tailwind v4", "Fluid Typography", "Custom Color Tokens", "Responsive Grid"],
+    projectSlug: "saywed",
   },
   Flutter: {
     name: "Flutter",
@@ -67,9 +68,9 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "primary",
     status: "Cross-Platform Mobile App",
     evidence:
-      "Built the Warung Lupi Android companion client consuming the shared Laravel REST API for on-the-go cashier slips and daily summaries.",
-    highlightTags: ["State Management", "REST Client", "Android Builds", "Offline Cache"],
-    projectSlug: "warung-lupi-web",
+      "Built the Warung Lupi Android POS app (v1.3.7) with Cloud Firestore real-time sync, PDF/QR receipt sharing, and Bluetooth 58mm thermal printing.",
+    highlightTags: ["Cloud Firestore", "Bluetooth ESC/POS", "PDF/QR Export", "Android CI/CD"],
+    projectSlug: "warung-lupi-android",
   },
   React: {
     name: "React",
@@ -96,7 +97,7 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "leveling",
     status: "Strict Static Typing",
     evidence:
-      "Core language of Hermes DevOps CLI: safety gates (SAFE / REVIEW / DANGEROUS), AST inspection, and 206 automated unit/integration tests.",
+      "Core language of Hermes DevOps CLI (v0.10.0): safety gates (SAFE / REVIEW / DANGEROUS), bounded autonomous pipeline, and 249 automated unit/integration tests.",
     highlightTags: ["Strict Mode", "Discriminated Unions", "CLI Architecture", "Generics"],
     projectSlug: "hermes-devops",
   },
@@ -106,7 +107,7 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "leveling",
     status: "Runtime & Developer Automation",
     evidence:
-      "Runs Hermes DevOps CLI and automated test pipelines. Process lifecycle management, stdout streaming, and filesystem operations.",
+      "Runs Hermes DevOps CLI v0.10.0 and automated test pipelines. Process lifecycle management, stdout streaming, and filesystem operations.",
     highlightTags: ["Node 25", "Child Process", "Async Streams", "npm Workspaces"],
     projectSlug: "hermes-devops",
   },
@@ -125,7 +126,7 @@ export const skillsData: Record<string, SkillDetail> = {
     tier: "leveling",
     status: "CI/CD & Repository Management",
     evidence:
-      "GitHub Actions workflow for DAILY.CO running PHPUnit against live MySQL container. Vercel CI/CD automatic deployment on main push.",
+      "GitHub Actions workflows for DAILY.CO (MySQL test matrix), Warung Lupi Android (APK release pipeline), and Vercel CI/CD deployment.",
     highlightTags: ["GitHub Actions", "Matrix Builds", "Automated Releases", "PR Checks"],
     projectSlug: "daily-co",
   },

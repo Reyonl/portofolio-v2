@@ -158,11 +158,12 @@ export default function Hero() {
               <Image
                 src="/images/reyon.png"
                 alt="Portrait of Reyon Lau Jiemin smiling with arms crossed, wearing a dark batik shirt"
-                width={560}
-                height={880}
+                width={840}
+                height={1320}
                 priority
+                unoptimized
                 sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 430px"
-                className="relative h-auto w-full [filter:sepia(0.07)_saturate(1.06)_drop-shadow(0_28px_64px_rgba(255,138,61,0.14))]"
+                className="relative h-auto w-full [filter:drop-shadow(0_28px_64px_rgba(255,138,61,0.14))]"
               />
             </div>
             {/* live-status chip sitting in the fade zone below the cutout */}
@@ -174,10 +175,6 @@ export default function Hero() {
               open to work
             </div>
           </div>
-          {/* honest little photo credit */}
-          <p className="mt-3 text-center font-mono text-[10px] tracking-[0.22em] text-muted uppercase lg:text-right">
-            Canon EOS R5 · 01/2026
-          </p>
         </motion.div>
       </div>
 

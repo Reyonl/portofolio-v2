@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ProjectHeader from "@/components/ProjectHeader";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
-import ProjectMicroPreview from "@/components/ProjectMicroPreview";
 import { getProject, projects } from "@/data/projects";
 import { profile } from "@/data/site";
 import { SITE_URL } from "@/lib/siteUrl";
@@ -109,6 +108,7 @@ export default async function ProjectPage({
           name: "Reyon Lau Jiemin",
           url: SITE_URL,
         },
+        ...(project.liveUrl?.url ? { url: project.liveUrl.url } : {}),
         ...(project.repo?.url ? { codeRepository: project.repo.url } : {}),
         ...(project.release ? { downloadUrl: project.release } : {}),
       },
@@ -130,21 +130,6 @@ export default async function ProjectPage({
         </Link>
 
         <ProjectHeader project={project} />
-
-        {/* Live Feature Simulation / Micro-Preview Box */}
-        <section className="mt-14">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-mono text-[11px] tracking-[0.28em] text-accent uppercase">
-              {"// Interactive Micro-Simulation"}
-            </h2>
-            <span className="font-mono text-[10px] text-muted uppercase">
-              Interactive State
-            </span>
-          </div>
-          <div className="h-80 sm:h-96 w-full overflow-hidden rounded-2xl border border-line bg-panel shadow-lg">
-            <ProjectMicroPreview slug={project.slug} isHovered={true} mode="detail" />
-          </div>
-        </section>
 
         {/* Mini Architecture / Flow Diagram */}
         <section className="mt-14">

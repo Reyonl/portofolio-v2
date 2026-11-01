@@ -16,6 +16,7 @@ export interface Project {
   stack: string[];
   image: { src: string; alt: string; width: number; height: number };
   gallery?: { src: string; alt: string; caption: string; width: number; height: number }[];
+  liveUrl?: { url: string; label: string };
   repo?: { url: string; label: string };
   release?: string;
   todo?: string; // clearly marked missing content
@@ -31,19 +32,62 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "hermes-devops",
+    slug: "saywed",
     index: "01",
-    title: "Hermes DevOps",
-    blurb: "TypeScript CLI that runs real build/test/release steps — and refuses success without evidence.",
+    title: "SayWed — Boutique Wedding SaaS",
+    blurb: "Multi-tenant digital wedding invitation SaaS with dual Filament panels and 6 bespoke cultural/editorial themes.",
     detail:
-      "Registers local projects, detects their stack, executes their own commands behind SAFE / REVIEW / DANGEROUS gates, re-reads the world before reporting, and keeps an append-only audit trail. 206 tests, released v0.8.0 with Phase 8 bootstrap scaffolding.",
+      "Production SaaS at saywed.my.id built on Laravel, Filament 3, and Tailwind CSS v4. Combines an admin backoffice and customer self-service workspace with Google OAuth, automatic WebP image optimization, RSVP & QRIS digital envelope, and real-time Telegram order/visitor alerts.",
+    category: "SaaS Web Application",
+    period: "2026 — present",
+    status: "shipped",
+    stack: ["Laravel", "Filament", "Tailwind CSS", "Alpine.js", "MySQL"],
+    image: {
+      src: "/images/saywed-hero.jpg",
+      alt: "SayWed boutique wedding invitation platform showcasing Fusion Editorial, Botanica Sage, and Noir Royale themes.",
+      width: 1440,
+      height: 718,
+    },
+    gallery: [
+      {
+        src: "/images/saywed-invitation.jpg",
+        alt: "Live wedding invitation view on SayWed showing Made & Diah Minangkabau x Bali heritage theme.",
+        caption: "Live invitation engine — Minangkabau × Bali heritage edition with dynamic couple typography.",
+        width: 1440,
+        height: 1248,
+      },
+      {
+        src: "/images/saywed-catalog.jpg",
+        alt: "SayWed full template catalog displaying 3 modern editorial and 3 Indonesian traditional adat themes.",
+        caption: "6 curated templates — 3 Modern Editorial (Fusion, Botanica, Noir) & 3 Traditional Adat (Sunda, Jawa, Minang).",
+        width: 1440,
+        height: 898,
+      },
+    ],
+    liveUrl: {
+      url: "https://saywed.my.id",
+      label: "saywed.my.id",
+    },
+    repo: {
+      url: "https://github.com/Reyonl/saywed",
+      label: "Repository",
+    },
+    featured: true,
+  },
+  {
+    slug: "hermes-devops",
+    index: "02",
+    title: "Hermes DevOps",
+    blurb: "TypeScript CLI & autonomous DevOps engine that refuses success without verified evidence.",
+    detail:
+      "Registers local projects, detects their stack, executes build/test/deploy steps behind SAFE / REVIEW / DANGEROUS gates, runs a bounded autonomous repair pipeline, and writes an append-only audit trail. 249 tests across Phases 1–8, released v0.10.0.",
     category: "Developer Automation",
     period: "2026 — present",
     status: "active",
     stack: ["TypeScript", "Node.js", "Git", "GitHub Actions"],
     image: {
       src: "/images/hermes-terminal-wide.jpg",
-      alt: "Terminal showing real hermes-devops status output at v0.8.0 with registered projects and health counts.",
+      alt: "Terminal showing real hermes-devops status output with registered projects and health counts.",
       width: 1412,
       height: 564,
     },
@@ -51,23 +95,22 @@ export const projects: Project[] = [
       url: "https://github.com/Reyonl/hermes-devops",
       label: "Repository",
     },
-    release: "https://github.com/Reyonl/hermes-devops/releases/tag/v0.8.0",
-    featured: true,
+    release: "https://github.com/Reyonl/hermes-devops/releases/tag/v0.10.0",
     provenance: {
-      generatedBy: "hermes-devops/0.8.0",
-      version: "0.8.0",
-      head: "728c7e3",
+      generatedBy: "hermes-devops/0.10.0",
+      version: "0.10.0",
+      head: "a3ba338",
       branch: "main",
-      verifiedAt: "2026-10-13",
+      verifiedAt: "2026-10-23",
     },
   },
   {
     slug: "warung-lupi-web",
-    index: "02",
+    index: "03",
     title: "Warung Lupi — Web",
     blurb: "Laravel ledger for a real food shop: slips, debts, promo rules, cigarette reporting.",
     detail:
-      "The source of truth for two clients: a React-in-Laravel web system whose shared API also powers the Android app. Bon/lunas/hutang records, per-item reporting, deployed on a live domain.",
+      "The source of truth for a real daily shop: a React-in-Laravel web system tracking bon/lunas/hutang records, automatic promo rules, and per-item cigarette reporting, deployed on a live production domain.",
     category: "Web Application",
     period: "2025 — 2026",
     status: "shipped",
@@ -82,14 +125,14 @@ export const projects: Project[] = [
       {
         src: "/images/warung-rokok.jpg",
         alt: "Warung Lupi cigarette report: date filters, totals with units sold and outstanding debt, per-item tables.",
-        caption: "Laporan Rokok — reporting surface of the shared API.",
+        caption: "Laporan Rokok — per-item cigarette sales and outstanding debt tracking.",
         width: 1440,
         height: 900,
       },
       {
         src: "/images/warung-bon.jpg",
         alt: "Warung Lupi credit slip entry screen.",
-        caption: "Bon entry — the daily workflow of the shop.",
+        caption: "Riwayat Bon — credit slip ledger and daily shop workflow.",
         width: 1440,
         height: 760,
       },
@@ -100,12 +143,36 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "warung-lupi-android",
+    index: "04",
+    title: "Warung Lupi — Android",
+    blurb: "Flutter shop POS migrated to Cloud Firestore with Bluetooth thermal printing & QR/PDF receipts.",
+    detail:
+      "Mobile POS for Warung Lupi powered by Cloud Firestore real-time sync: Indonesian-language slips, automatic promo rules, PDF & QR receipt sharing, and direct 58mm Bluetooth ESC/POS thermal printing. Released v1.3.7 APK via GitHub Actions CI/CD.",
+    category: "Mobile Application",
+    period: "2026",
+    status: "shipped",
+    stack: ["Flutter", "Firebase Firestore", "Bluetooth ESC/POS", "GitHub Actions"],
+    image: {
+      src: "/images/warung-pelanggan.jpg",
+      alt: "Warung Lupi customer management and ledger view.",
+      width: 1440,
+      height: 760,
+    },
+    repo: {
+      url: "https://github.com/Reyonl/warung-lupi-firebase",
+      label: "Repository",
+    },
+    release:
+      "https://github.com/Reyonl/warung-lupi-firebase/releases/tag/v1.3.7",
+  },
+  {
     slug: "daily-co",
-    index: "03",
+    index: "05",
     title: "DAILY.CO",
     blurb: "Browser mockup editor turning screen-print designs into orders — four print zones, no back-and-forth.",
     detail:
-      "Thesis-turned-product: a Laravel + Livewire multi-zone Fabric.js canvas editor with persisted design state and an admin-verified order workflow. 46 tests across 11 files run in CI against MySQL.",
+      "Thesis-turned-product: a Laravel + Livewire multi-zone Fabric.js canvas editor with WCAG contrast detection, persisted design state, and an admin-verified order workflow. 46 tests across 11 files run in CI against MySQL.",
     category: "Web Application",
     period: "2025 — 2026",
     status: "shipped",
@@ -120,30 +187,6 @@ export const projects: Project[] = [
       url: "https://github.com/Reyonl/project_TA",
       label: "Repository",
     },
-  },
-  {
-    slug: "warung-lupi-android",
-    index: "04",
-    title: "Warung Lupi — Android",
-    blurb: "Flutter shop app that prints receipts straight to a Bluetooth thermal printer.",
-    detail:
-      "The mobile half of the Warung Lupi ecosystem: Provider state over the shared Laravel API, Indonesian-language slips, promo rules, real on-device thermal printing. Released v1.0.1 APK through its own CI/CD.",
-    category: "Mobile Application",
-    period: "2026",
-    status: "shipped",
-    stack: ["Flutter", "Dio", "Bluetooth", "GitHub Actions"],
-    image: {
-      src: "/images/warung-pelanggan.jpg",
-      alt: "Warung Lupi Android app customer screen from the released build.",
-      width: 1440,
-      height: 760,
-    },
-    repo: {
-      url: "https://github.com/Reyonl/flutter-warungLupi-",
-      label: "Repository",
-    },
-    release:
-      "https://github.com/Reyonl/flutter-warungLupi-/releases/tag/v1.0.1",
   },
 ];
 

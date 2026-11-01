@@ -16,12 +16,13 @@ export default function ProjectHeader({ project }: { project: Project }) {
       <motion.div
         layoutId={`project-plate-${project.slug}`}
         style={{ aspectRatio: `${project.image.width} / ${project.image.height}` }}
-        className="relative overflow-hidden rounded-2xl border border-line bg-panel"
+        className="relative overflow-hidden rounded-2xl border border-line bg-panel shadow-2xl"
       >
         <Image
           src={project.image.src}
           alt={project.image.alt}
           fill
+          unoptimized
           sizes="(max-width: 1024px) 100vw, 1024px"
           priority
           decoding="async"
@@ -57,12 +58,29 @@ export default function ProjectHeader({ project }: { project: Project }) {
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
+          {project.liveUrl ? (
+            <a
+              href={project.liveUrl.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
+            >
+              Live · {project.liveUrl.label}
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" />
+              </svg>
+            </a>
+          ) : null}
           {project.repo ? (
             <a
               href={project.repo.url}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
+              className={`inline-flex min-h-[44px] items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02] ${
+                project.liveUrl
+                  ? "border border-line bg-panel2 text-fg hover:border-accent"
+                  : "bg-accent text-ink"
+              }`}
             >
               {project.repo.label}
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -103,7 +121,7 @@ export default function ProjectHeader({ project }: { project: Project }) {
 
       {project.gallery?.map((g) => (
         <RevealFade key={g.src} className="mt-10">
-          <figure className="overflow-hidden rounded-2xl border border-line bg-panel">
+          <figure className="overflow-hidden rounded-2xl border border-line bg-panel shadow-xl">
             <div
               className="relative"
               style={{ aspectRatio: `${g.width} / ${g.height}` }}
@@ -112,6 +130,7 @@ export default function ProjectHeader({ project }: { project: Project }) {
                 src={g.src}
                 alt={g.alt}
                 fill
+                unoptimized
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 loading="lazy"
                 decoding="async"
