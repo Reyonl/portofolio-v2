@@ -20,28 +20,60 @@ interface ArchitectureData {
 }
 
 const ARCHITECTURES: Record<string, ArchitectureData> = {
-  "warung-lupi-web": {
-    title: "Shared Laravel API Architecture",
+  saywed: {
+    title: "Multi-Panel Invitation SaaS Engine",
     description:
-      "A unified backend architecture serving both desktop React web and on-the-ground Flutter mobile with synchronized transaction ledgers.",
-    badge: "Multi-Client Backend",
+      "Dual Filament 3 workspaces (Admin & Customer App) paired with a dynamic cultural/editorial invitation renderer and Telegram notifications.",
+    badge: "Multi-Tenant SaaS",
+    nodes: [
+      {
+        name: "Customer & Admin Panels",
+        role: "Dual Workspace",
+        tag: "Filament 3 + OAuth",
+        details:
+          "Google Socialite sign-in, self-service couple workspace (/app), and backoffice verification panel (/admin).",
+      },
+      {
+        name: "Media & WebP Pipeline",
+        role: "Asset Optimizer",
+        tag: "Intervention Image",
+        details:
+          "Automatically converts and compresses uploaded pre-wedding covers, bride/groom portraits, and galleries into WebP.",
+      },
+      {
+        name: "Dynamic Theme Engine",
+        role: "6 Cultural/Editorial Views",
+        tag: "Blade + Tailwind v4",
+        details:
+          "Renders 3 Modern Editorial (Fusion, Botanica, Noir) and 3 Traditional Adat (Sunda, Jawa, Minang) invitations with RSVP & QRIS gifts.",
+        highlight: true,
+      },
+      {
+        name: "Telemetry & Telegram Bot",
+        role: "Realtime Alerts",
+        tag: "Beacon API + Bot",
+        details:
+          "Tracks live visitor sessions and dispatches instant order, payment, and RSVP notifications to Telegram.",
+      },
+    ],
+    connectionsNote:
+      "Google OAuth & Filament Panels → WebP Media Pipeline → 6-Theme Invitation Engine + Telegram Bot Alerts",
+  },
+  "warung-lupi-web": {
+    title: "Shared Laravel Ledger Architecture",
+    description:
+      "A unified backend architecture serving desktop React-in-Laravel web reporting and synchronized shop transaction ledgers.",
+    badge: "Web Ledger System",
     nodes: [
       {
         name: "React Web Dashboard",
         role: "Desktop Client",
-        tag: "React + Vite",
+        tag: "React + Laravel",
         details:
           "Admin ledger management, debt tracking (bon), per-item cigarette analytics, and financial auditing.",
       },
       {
-        name: "Flutter Android App",
-        role: "Mobile Field Client",
-        tag: "Flutter + Dio",
-        details:
-          "Point-of-sale customer entry, offline slip staging, and hardware ESC/POS thermal printing.",
-      },
-      {
-        name: "Laravel 11 REST API",
+        name: "Laravel REST & Web Core",
         role: "Central Core",
         tag: "Shared Controllers",
         details:
@@ -56,54 +88,54 @@ const ARCHITECTURES: Record<string, ArchitectureData> = {
           "Structured relational schemas with foreign key integrity and custom promo rules calculation.",
       },
       {
-        name: "ESC/POS Thermal Printer",
-        role: "Hardware Output",
-        tag: "Bluetooth 58mm",
+        name: "Cigarette & Debt Reports",
+        role: "Analytics Surface",
+        tag: "Date-Filtered SQL",
         details:
-          "Direct mobile socket stream printing physical customer receipts without desktop print dialogue.",
+          "Aggregates daily/monthly cigarette unit sales, paid slips, and outstanding customer receivables.",
       },
     ],
     connectionsNote:
-      "Dual Clients (Web & Flutter) → Shared Laravel API → MySQL Data Layer + Bluetooth Thermal Hardware",
+      "React Dashboard → Laravel Ledger Controllers → MySQL ACID Data Layer → Per-Item Reporting",
   },
   "warung-lupi-android": {
-    title: "Mobile POS & Hardware Flow",
+    title: "Cloud Firestore POS & Thermal Print Flow",
     description:
-      "Hardware-integrated mobile client with decoupled state and shared API integration.",
-    badge: "Hardware & Mobile",
+      "Serverless real-time mobile POS with Cloud Firestore sync, PDF/QR receipt generation, and direct Bluetooth thermal printing.",
+    badge: "Firestore + Hardware",
     nodes: [
       {
         name: "Flutter Mobile UI",
         role: "Shop Attendant UI",
         tag: "Material 3",
         details:
-          "Instant entry keypad, catalog search, customer ledger lookup, and promo selector.",
+          "Instant entry keypad, catalog search, customer debt lookup, and automatic promo rule calculator.",
       },
       {
-        name: "Provider State Manager",
-        role: "Client State & Cache",
-        tag: "Reactive State",
+        name: "Cloud Firestore Sync",
+        role: "Realtime Serverless DB",
+        tag: "Firebase v1.3.7",
         details:
-          "Keeps active cart and receipt state responsive with optimistic UI updates.",
-      },
-      {
-        name: "Shared Laravel API",
-        role: "Cloud Backend",
-        tag: "REST Endpoints",
-        details:
-          "Syncs sales, verifies debt balances, and persists closed orders.",
+          "Persists customer slips, item catalog, and debt balances with offline-first caching and instant multi-device sync.",
         highlight: true,
+      },
+      {
+        name: "PDF & QR Receipt Engine",
+        role: "Digital Slip Export",
+        tag: "pdf + share_plus",
+        details:
+          "Generates digital PDF invoices and QR codes for instant WhatsApp sharing alongside physical slips.",
       },
       {
         name: "Bluetooth Thermal Driver",
         role: "Peripheral Dispatch",
-        tag: "ESC/POS Protocol",
+        tag: "ESC/POS 58mm",
         details:
-          "Encodes text and bitmap commands sent over Bluetooth channel to 58mm portable printer.",
+          "Encodes text and receipt formatting sent over Bluetooth socket to a 58mm portable thermal printer.",
       },
     ],
     connectionsNote:
-      "UI Action → Provider State → Laravel API Sync ↳ Bluetooth ESC/POS Print Stream",
+      "Flutter POS UI → Cloud Firestore Sync ↳ Bluetooth 58mm ESC/POS Print + PDF/QR Share",
   },
   "daily-co": {
     title: "Interactive Canvas & Order Flow",
@@ -116,7 +148,7 @@ const ARCHITECTURES: Record<string, ArchitectureData> = {
         role: "Client Vector CAD",
         tag: "Fabric.js 5.3",
         details:
-          "Multi-zone coordinates (front, back, left/right sleeve), SVG/raster imports, boundaries, and transformations.",
+          "Multi-zone coordinates (front, back, left/right sleeve), WCAG contrast warnings, SVG/raster imports, and transforms.",
         highlight: true,
       },
       {
@@ -145,43 +177,43 @@ const ARCHITECTURES: Record<string, ArchitectureData> = {
       "Fabric.js Canvas (4 Zones) → Livewire Sync → High-Res Export → MySQL Order Pipeline",
   },
   "hermes-devops": {
-    title: "Gated Safety Execution Engine",
+    title: "Gated Safety & Autonomous Execution Engine",
     description:
-      "Deterministic developer CLI and agent runner enforcing rigorous test gates and audit trails.",
-    badge: "Developer Tooling",
+      "Deterministic developer CLI and autonomous repair pipeline enforcing test gates and append-only audit trails.",
+    badge: "Developer Tooling v0.10.0",
     nodes: [
       {
-        name: "CLI Input / Task Agent",
+        name: "CLI & Autonomous Runner",
         role: "Command Intake",
         tag: "Node.js / TS",
         details:
-          "Parses developer instructions and commands with strict schema validation.",
+          "Parses developer commands and bounded autonomous repair loops (hermes auto) with strict schema validation.",
       },
       {
         name: "Stack & Repo Introspector",
         role: "Environment Inspection",
         tag: "AST / FS Scanner",
         details:
-          "Inspects package configs, lockfiles, and git state before issuing commands.",
+          "Inspects package configs, lockfiles, and git state across Node.js, Next.js, Laravel, PHP, and Flutter repos.",
       },
       {
         name: "Execution Gatekeeper",
         role: "Tri-Gate Policy",
         tag: "SAFE / REVIEW / DANGER",
         details:
-          "Blocks dangerous mutations, requires confirmation for review tasks, and executes safe tasks automatically.",
+          "Blocks dangerous mutations, requires confirmation for review tasks, and executes safe diagnostics automatically.",
         highlight: true,
       },
       {
         name: "Verification & Audit Ledger",
         role: "Post-Condition Engine",
-        tag: "Append-Only JSONL",
+        tag: "249 Tests · JSONL",
         details:
-          "Re-verifies project state with 198 automated test suites and writes immutable audit records.",
+          "Re-verifies world state after every step, backed by 249 automated tests and an immutable append-only audit trail.",
       },
     ],
     connectionsNote:
-      "CLI Intake → Stack Inspection → Safety Policy Tri-Gate → Verification & Append-Only Log",
+      "CLI / Auto Intake → Stack Inspection → Safety Policy Tri-Gate → 249 Tests & Append-Only Audit Log",
   },
 };
 

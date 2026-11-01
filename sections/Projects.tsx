@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/data/projects";
 import MaskReveal from "@/components/MaskReveal";
-import ProjectMicroPreview from "@/components/ProjectMicroPreview";
 
 const FILTERS = [
   "All",
@@ -21,8 +20,7 @@ type FilterType = (typeof FILTERS)[number];
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<FilterType>("All");
-  const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
-  const [previewSlug, setPreviewSlug] = useState<string | null>(null);
+  const [activeSlideBySlug, setActiveSlideBySlug] = useState<Record<string, number>>({});
 
   const filteredProjects = projects.filter((p) => {
     if (activeFilter === "All") return true;
@@ -102,13 +100,25 @@ export default function Projects() {
         {/* Projects Grid with layout transitions */}
         <motion.div
           layout
-          className="grid gap-6 md:grid-cols-2"
+          className="grid gap-8 md:grid-cols-2"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((p, i) => {
-              const isHovered = hoveredSlug === p.slug;
-              const isPreviewing = previewSlug === p.slug;
-              const isFirstWide = filteredProjects.length > 1 && i === 0 && activeFilter === "All";
+              const isFirstWide =
+                filteredProjects.length > 1 && i === 0 && activeFilter === "All";
+              const slides = [
+                { src: p.image.src, alt: p.image.alt, label: "Primary View" },
+                ...(p.gallery?.map((g, idx) => ({
+                  src: g.src,
+                  alt: g.alt,
+                  label: g.caption.split("—")[0]?.trim() || `View ${idx + 2}`,
+                })) ?? []),
+              ];
+              const currentSlideIdx = Math.min(
+                activeSlideBySlug[p.slug] ?? 0,
+                slides.length - 1
+              );
+              const activeSlide = slides[currentSlideIdx];
 
               return (
                 <motion.article
@@ -119,106 +129,116 @@ export default function Projects() {
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className={isFirstWide ? "md:col-span-2" : ""}
-                  onMouseEnter={() => setHoveredSlug(p.slug)}
-                  onMouseLeave={() => setHoveredSlug(null)}
                 >
-                  <div className="group relative block overflow-hidden rounded-2xl border border-line bg-panel transition-colors duration-300 hover:border-accent/50">
+                  <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-panel transition-colors duration-300 hover:border-accent/50 shadow-xl shadow-black/40">
+                    {/* Top Browser / Window Bar */}
+                    <div className="flex items-center justify-between border-b border-line bg-[#0b0e14] px-4 py-2.5">
+                      <div className="flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]/80" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]/80" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]/80" />
+                        <span className="ml-2 font-mono text-[11px] font-semibold text-accent">
+                          {p.index}
+                        </span>
+                        <span className="font-mono text-[10px] text-muted hidden sm:inline">
+                          · {p.liveUrl ? p.liveUrl.label : p.category}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {slides.length > 1 && (
+                          <div className="flex items-center gap-1 rounded-full border border-line bg-panel2 px-1.5 py-0.5">
+                            {slides.map((s, sIdx) => (
+                              <button
+                                key={s.src}
+                                type="button"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  setActiveSlideBySlug((prev) => ({
+                                    ...prev,
+                                    [p.slug]: sIdx,
+                                  }));
+                                }}
+                                title={s.label}
+                                className={`rounded-full px-2 py-0.5 font-mono text-[9px] transition-colors ${
+                                  currentSlideIdx === sIdx
+                                    ? "bg-accent text-ink font-bold"
+                                    : "text-muted hover:text-fg"
+                                }`}
+                              >
+                                {sIdx + 1}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                        <span className="font-mono text-[10px] tracking-[0.18em] text-muted uppercase">
+                          {p.category}
+                        </span>
+                      </div>
+                    </div>
+
                     <Link
                       href={`/work/${p.slug}`}
-                      className="block focus:outline-none"
+                      className="flex flex-1 flex-col focus:outline-none"
                     >
+                      {/* Authentic High-Res Screenshot Preview Plate */}
                       <motion.div
                         layoutId={`project-plate-${p.slug}`}
-                        className={`relative overflow-hidden ${
+                        className={`relative w-full overflow-hidden border-b border-line bg-[#090c12] ${
                           isFirstWide
-                            ? "aspect-[16/10] md:aspect-[2.5/1]"
-                            : "aspect-[4/3] md:aspect-[16/10]"
+                            ? "aspect-[16/9] md:aspect-[2.1/1]"
+                            : "aspect-[16/10]"
                         }`}
                       >
-                        {/* Base Image */}
                         <Image
-                          src={p.image.src}
-                          alt={p.image.alt}
+                          key={activeSlide.src}
+                          src={activeSlide.src}
+                          alt={activeSlide.alt}
                           fill
+                          unoptimized
                           sizes={
                             isFirstWide
-                              ? "(max-width: 768px) 100vw, 56vw"
-                              : "(max-width: 768px) 100vw, 28vw"
+                              ? "(max-width: 768px) 100vw, 1280px"
+                              : "(max-width: 768px) 100vw, 640px"
                           }
                           priority={i === 0}
                           loading={i === 0 ? undefined : "lazy"}
                           decoding="async"
-                          className="object-cover object-top brightness-[0.85] saturate-[0.9] transition-[transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-hover:brightness-100 group-hover:saturate-100"
+                          className="object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]"
                         />
-                        <div className="absolute inset-x-0 bottom-0 h-4/5 bg-gradient-to-t from-ink from-45% via-ink/80 to-transparent" />
-
-                        {/* Interactive Micro-loop Preview Overlay */}
-                        {(isHovered || isPreviewing) && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute inset-0 z-20 hidden md:block"
-                          >
-                            <ProjectMicroPreview
-                              slug={p.slug}
-                              isHovered={isHovered || isPreviewing}
-                              mode="card"
-                            />
-                          </motion.div>
-                        )}
                       </motion.div>
 
-                      {/* Header Overlays */}
-                      <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-5 z-30">
-                        <span className="font-mono text-[11px] text-accent font-semibold">
-                          {p.index}
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono text-[10px] tracking-[0.22em] text-muted uppercase">
-                            {p.category}
-                          </span>
-                        </div>
-                      </div>
+                      {/* Card Content Footer */}
+                      <div className="relative z-10 flex flex-1 flex-col justify-between p-5 sm:p-7">
+                        <div>
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl text-fg group-hover:text-accent transition-colors">
+                              {p.title}
+                            </h3>
+                            <span className="font-mono text-[10px] tracking-wider text-muted uppercase">
+                              {p.period}
+                            </span>
+                          </div>
 
-                      {/* Content Bottom */}
-                      <div className="relative z-30 p-5 sm:p-7">
-                        <div className="flex items-start justify-between gap-4">
-                          <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl text-fg">
-                            {p.title}
-                          </h3>
+                          <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-muted">
+                            {p.blurb}
+                          </p>
                         </div>
 
-                        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
-                          {p.blurb}
-                        </p>
-
-                        <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+                        <div className="mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-2 pt-2">
                           {p.stack.slice(0, 5).map((s) => (
                             <span
                               key={s}
-                              className="font-mono text-[10px] tracking-wider text-fg/70 uppercase bg-panel2 px-2 py-0.5 rounded border border-line/60"
+                              className="font-mono text-[10px] tracking-wider text-fg/80 uppercase bg-panel2 px-2.5 py-1 rounded border border-line/80"
                             >
                               {s}
                             </span>
                           ))}
 
                           <div className="ml-auto flex items-center gap-3">
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setPreviewSlug(previewSlug === p.slug ? null : p.slug);
-                              }}
-                              className="md:hidden rounded-full border border-line bg-panel2 px-2.5 py-1 font-mono text-[10px] text-accent flex items-center gap-1"
-                            >
-                              {previewSlug === p.slug ? "Hide Preview" : "⚡ Micro Preview"}
-                            </button>
-
-                            <span className="hidden translate-y-1 items-center gap-1 font-mono text-[10px] tracking-[0.2em] text-accent uppercase opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:flex">
-                              View detail
+                            <span className="inline-flex items-center gap-1 font-mono text-[10px] tracking-[0.2em] text-accent uppercase transition-transform duration-300 group-hover:translate-x-0.5">
+                              View case study
                               <svg
                                 width="12"
                                 height="12"
@@ -235,17 +255,6 @@ export default function Projects() {
                             </span>
                           </div>
                         </div>
-
-                        {/* Mobile Micro-Preview Expandable Box */}
-                        {previewSlug === p.slug && (
-                          <div className="mt-4 md:hidden h-56 rounded-xl overflow-hidden border border-line">
-                            <ProjectMicroPreview
-                              slug={p.slug}
-                              isHovered={true}
-                              mode="card"
-                            />
-                          </div>
-                        )}
                       </div>
                     </Link>
                   </div>

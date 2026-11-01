@@ -38,8 +38,8 @@ export const timeline: Milestone[] = [
   },
   {
     date: "early 2026",
-    title: "Warung Lupi shipped",
-    line: "Laravel web system plus a Flutter Android app with Bluetooth thermal printing, v1.0.1 via CI/CD.",
+    title: "Warung Lupi ecosystem shipped",
+    line: "Laravel web ledger plus a Flutter Android POS app (v1.3.7 on Cloud Firestore + Bluetooth thermal printing).",
   },
   {
     date: "03/2026",
@@ -67,8 +67,8 @@ export const timeline: Milestone[] = [
   },
   {
     date: "now",
-    title: "Leveling up: React + Next.js",
-    line: "This site is part of the climb. Hermes DevOps still active.",
+    title: "SayWed SaaS & Hermes DevOps v0.10.0",
+    line: "Shipped saywed.my.id (Laravel + Filament SaaS) and Hermes DevOps v0.10.0 (249 tests) while leveling up in Next.js.",
     tag: "now",
   },
 ];
