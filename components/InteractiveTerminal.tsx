@@ -42,7 +42,7 @@ export default function InteractiveTerminal() {
       type: "output",
       content:
         "✔ node v25.2.1 [PASS]\n✔ git v2.52.0 [PASS]\n✔ php 8.3.16 + composer [PASS]\n✔ flutter 3.38.5-stable [PASS]\n✔ mysql connection pool [ONLINE]\nAll 5 toolchains verified. Operational ready.",
-      badge: "EVIDENCE VERIFIED",
+      badge: "DIAGNOSTICS OK",
       badgeColor: "green",
     },
   ]);
@@ -127,7 +127,7 @@ export default function InteractiveTerminal() {
           "  ✔ PHP / Composer: v8.3.16 CLI [PASS]\n" +
           "  ✔ MySQL engine: 8.0.30 via Laragon [PASS]\n" +
           "  ✔ Flutter SDK: 3.38.5-stable [PASS]\n" +
-          "5/5 probes answered with fresh fact. Zero fabricated claims.";
+          "All 5 toolchains verified and operational.";
         badge = "HEALTHY";
         badgeColor = "green";
       } else if (lower === "hermes status") {

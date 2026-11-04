@@ -93,14 +93,14 @@ export default function Skills() {
               <MaskReveal>Stack & Evidence</MaskReveal>
             </h2>
             <p className="mt-3 font-mono text-xs text-muted">
-              Click any technology chip below to inspect real repository proof & implementation details.
+              Click any technology chip below to view implementation details and verified production usage.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-accent animate-ping" />
             <span className="font-mono text-[11px] text-accent uppercase tracking-wider">
-              Zero fabricated claims
+              Production Verified
             </span>
           </div>
         </div>

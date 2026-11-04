@@ -136,10 +136,10 @@ export default async function ProjectPage({
           <ArchitectureDiagram slug={project.slug} />
         </section>
 
-        {/* The Honest Version */}
+        {/* Technical Implementation */}
         <section className="mt-16 rounded-2xl border border-line bg-panel p-6 sm:p-8">
           <h2 className="font-mono text-[11px] tracking-[0.28em] text-accent uppercase">
-            {"// the honest version"}
+            {"// Technical Implementation Details"}
           </h2>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-fg/90">
             {project.detail}
@@ -147,7 +147,7 @@ export default async function ProjectPage({
 
           <p className="mt-8 text-xs text-muted font-mono">
             Status: {project.status === "active" ? "actively developed" : "shipped"} ·{" "}
-            Numbers and metrics above reflect repository code, zero fabricated claims.
+            Architecture and metrics verified against production repository code.
           </p>
         </section>
 

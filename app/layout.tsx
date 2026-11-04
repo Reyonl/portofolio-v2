@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s — Reyon Lau Jiemin",
   },
   description:
-    "Fresh Informatics Engineering graduate (Universitas Pamulang, 2026). PHP + Laravel at home, React + Next.js on the way up. Real shipped projects, built with AI-assisted workflows.",
+    "Informatics Engineering graduate (Universitas Pamulang, 2026) specializing in Laravel, PHP, REST APIs, and full-stack web development with shipped production projects.",
   keywords: [
     "Reyon Lau Jiemin",
     "Junior Developer",
@@ -60,12 +60,12 @@ export const metadata: Metadata = {
     siteName: "Reyon Lau Jiemin — Portfolio",
     title: "Reyon Lau Jiemin — Junior Developer",
     description:
-      "Fresh Informatics Engineering graduate (Universitas Pamulang, 2026). PHP + Laravel at home, React + Next.js on the way up. Real shipped projects.",
+      "Informatics Engineering graduate (Universitas Pamulang, 2026) specializing in Laravel, PHP, and full-stack web applications with shipped production projects.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Reyon Lau Jiemin — Junior Developer",
-    description: "PHP + Laravel at home, React + Next.js on the way up. Real projects, shipped.",
+    description: "Laravel & PHP backend developer with shipped production projects in retail, SaaS, and custom workflows.",
     creator: "@Reyonl",
   },
   robots: { index: true, follow: true },

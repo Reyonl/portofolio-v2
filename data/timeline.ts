@@ -44,14 +44,14 @@ export const timeline: Milestone[] = [
   {
     date: "03/2026",
     title: "Maju Bareng AI — Hacktiv8",
-    line: "Hands-on AI prompt engineering and integrating Gemini API into modern web applications.",
+    line: "Technical training on integrating the Gemini API into modern web application workflows.",
     tag: "training",
   },
   {
     date: "mid 2026",
-    title: "Vibe coding, ~1 year in",
-    line: "Cursor → Antigravity → Hermes Agent. AI-assisted workflow, still reading every diff.",
-    tag: "workflow",
+    title: "Production Architecture & Tooling",
+    line: "Developed full-stack SaaS architecture, automated test pipelines, and developer tooling.",
+    tag: "architecture",
   },
   {
     date: "04/2026",
@@ -67,8 +67,8 @@ export const timeline: Milestone[] = [
   },
   {
     date: "now",
-    title: "SayWed SaaS & Hermes DevOps v0.10.0",
-    line: "Shipped saywed.my.id (Laravel + Filament SaaS) and Hermes DevOps v0.10.0 (249 tests) while leveling up in Next.js.",
+    title: "SayWed SaaS & Production Systems",
+    line: "Maintaining saywed.my.id in production while expanding full-stack projects in Next.js and TypeScript.",
     tag: "now",
   },
 ];
