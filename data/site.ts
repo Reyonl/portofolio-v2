@@ -20,7 +20,7 @@ export const profile = {
   school: "Universitas Pamulang",
   graduation: "07/2026",
   certification: "BNSP Certified Web Programmer (10 April 2026, valid 3 years)",
-  tagline: "I ship real projects fast — Laravel at home, Next.js on the way up.",
+  tagline: "Building reliable web systems and REST APIs — specializing in Laravel and full-stack TypeScript.",
   codedSince: 2022,
   links: {
     email: "liurey55@gmail.com",
@@ -53,6 +53,6 @@ export const contactLinks: ContactLink[] = [
 ];
 
 export const footer = {
-  note: "Built from scratch with Next.js, Tailwind and Framer Motion.",
+  note: "Designed and built with Next.js, Tailwind CSS, and Framer Motion.",
   builtWith: ["Next.js", "Tailwind CSS", "motion", "Lenis"],
 } as const;

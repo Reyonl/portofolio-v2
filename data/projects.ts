@@ -78,9 +78,9 @@ export const projects: Project[] = [
     slug: "hermes-devops",
     index: "02",
     title: "Hermes DevOps",
-    blurb: "TypeScript CLI & autonomous DevOps engine that refuses success without verified evidence.",
+    blurb: "TypeScript CLI and developer automation pipeline with multi-toolchain diagnostics and release workflows.",
     detail:
-      "Registers local projects, detects their stack, executes build/test/deploy steps behind SAFE / REVIEW / DANGEROUS gates, runs a bounded autonomous repair pipeline, and writes an append-only audit trail. 249 tests across Phases 1–8, released v0.10.0.",
+      "Registers local projects, detects their tech stack, executes build and test suites behind SAFE / REVIEW / DANGEROUS safety gates, runs diagnostic repair passes, and logs an append-only audit trail. 249 automated tests across Phases 1–8, released v0.10.0.",
     category: "Developer Automation",
     period: "2026 — present",
     status: "active",

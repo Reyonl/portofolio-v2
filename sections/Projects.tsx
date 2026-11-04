@@ -61,7 +61,7 @@ export default function Projects() {
 
           <div className="flex items-center gap-2">
             <span className="font-mono text-[11px] tracking-[0.25em] text-muted uppercase">
-              {filteredProjects.length.toString().padStart(2, "0")} shown · 00 invented
+              {filteredProjects.length.toString().padStart(2, "0")} featured projects
             </span>
           </div>
         </header>
