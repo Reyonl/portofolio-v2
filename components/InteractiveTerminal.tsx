@@ -195,7 +195,7 @@ export default function InteractiveTerminal() {
           "• Experience: Pusdiklat BPS (Database Administrator Intern, Jan-Mar 2026)\n" +
           "• Certification: BNSP Certified Web Programmer (Apr 2026)\n" +
           "• Downloads available via /cv/Reyon-Lau-Jiemin-CV.pdf\n" +
-          "• Verified Work: SayWed SaaS (saywed.my.id), Warung Lupi ecosystem, Hermes DevOps";
+          "• Verified Work: SayWed SaaS (saywed.my.id), Warung Lupi ecosystem, Gadai Enoni Cell, DAILY.CO";
         badge = "ATS READY";
         badgeColor = "cyan";
       } else {
